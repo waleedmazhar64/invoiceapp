@@ -1,0 +1,210 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      Under Construction
+    </ion-row>
+  </ion-grid> -->
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+              Sales by day
+      </ion-col>
+      <ion-col>
+        Sales by day
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+              Sales by day
+      </ion-col>
+      <ion-col>
+        Sales by day
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+              Sales by day
+      </ion-col>
+      <ion-col>
+        Sales by day
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+              Sales by day
+      </ion-col>
+      <ion-col>
+        Sales by day
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <div id="div1">
+    <ion-card (click)="day()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>DAY</ion-card-title>
+         <ion-item lines="none">
+          <ion-icon slot="end" name="calendar"></ion-icon>
+          </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div2">
+    <ion-card (click)="month()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>MONTH</ion-card-title>
+         <ion-item lines="none">
+          <ion-icon slot="end" name="calendar"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div3">
+    <ion-card (click)="quarter()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>QUARTER</ion-card-title>
+         <ion-item lines="none">
+          <ion-icon slot="end" name="calendar"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div4">
+    <ion-card (click)="year()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>YEAR</ion-card-title>
+         <ion-item lines="none">
+          <ion-icon slot="end" name="calendar"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div5">
+    <ion-card (click)="client()">
+      <ion-card-header padding>
+       
+
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>CLIENT</ion-card-title>
+         <ion-item lines="none">
+           <ion-icon slot="end" name="person"></ion-icon>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div6">
+  <ion-card (click)="item()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Sales by</ion-card-subtitle>
+        <ion-card-title>ITEM</ion-card-title>
+         <ion-item lines="none">
+           <ion-icon slot="end" name="cube"></ion-icon>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div3">
+    <ion-card (click)="customerAging()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Customer</ion-card-subtitle>
+        <ion-card-title>AGING</ion-card-title>
+         <ion-item lines="none">
+          <ion-icon slot="end" name="alarm"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div4">
+    <ion-card (click)="customerStatement()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Customer</ion-card-subtitle>
+        <ion-card-title>STATMENT</ion-card-title>
+         <ion-item lines="none" color=''>
+          <ion-icon slot="end" name="document"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div5">
+    <ion-card (click)="expenseJournal()">
+      <ion-card-header padding>
+       
+
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Expnese</ion-card-subtitle>
+        <ion-card-title>JOURNAL</ion-card-title>
+         <ion-item lines="none">
+           <ion-icon slot="end" name="journal"></ion-icon>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="div6">
+  <ion-card (click)="expenseCategory()">
+      <ion-card-header padding>
+       
+        
+      </ion-card-header>
+    
+      <ion-card-content padding>
+        <ion-card-subtitle>Expense by</ion-card-subtitle>
+        <ion-card-title>CATEGORY</ion-card-title>
+         <ion-item lines="none">
+           <ion-icon slot="end" name="filing"></ion-icon>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

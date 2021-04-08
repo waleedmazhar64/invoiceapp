@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon padding  name="close" (click)="close()"></ion-icon>
+    </ion-buttons>
+    <ion-title *ngIf="edit == false">Details</ion-title>
+    <ion-title *ngIf="edit == true">Edit Vendor</ion-title>
+    <ion-label *ngIf="vendor.bActive === 1 && showEdit === 1" slot="end" (click)="del()">Deactivate</ion-label>
+    <ion-label *ngIf="vendor.bActive === 0 && showEdit === 1" slot="end" (click)="activate()">Activate</ion-label>
+    <ion-label *ngIf="edit == true" padding slot="end" (click)="save()">Save</ion-label>
+    <ion-label *ngIf="edit == false && showEdit === 1" padding slot="end" (click)="edit = true">Edit</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="edit == true">
+    <form [formGroup]="loginform">
+        <ion-grid>
+            <ion-row justify-content-center>
+              <ion-col class="col-md-6">
+                  <ion-item>
+                      <ion-icon slot="start" name="person"></ion-icon>
+  
+                      <ion-input type="text" placeholder="Vendor Name"  formControlName="Name" [(ngModel)]="vendor.Name"></ion-input>
+                  </ion-item>
+                  <ng-container *ngFor="let error of errormessages.Name">
+                    <div  style="color: red;" *ngIf="loginform.get('Name').hasError(error.type) && (loginform.get('Name').dirty || loginform.get('Name').touched)">
+                      *{{ error.message }}
+                    </div>
+                  </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                 <ion-col class="col-md-6">
+                     <ion-item>
+                        <ion-icon slot="start" name="pin"></ion-icon>
+                        <ion-input type="text" placeholder="Address"  formControlName="Address" [(ngModel)]="vendor.Address"></ion-input>
+                     </ion-item>
+                     <ng-container *ngFor="let error of errormessages.Address">
+                       <div style="color: red;" *ngIf="loginform.get('Address').hasError(error.type) && (loginform.get('Address').dirty || loginform.get('Address').touched)">
+                         *{{ error.message }}
+                       </div>
+                     </ng-container>
+                 </ion-col>
+               </ion-row>
+               <ion-row justify-content-center>
+                    <ion-col class="col-md-6">
+                        <ion-item>
+                            <ion-icon slot="start" name="call"></ion-icon>
+                            <ion-input type="text" placeholder="Phone" formControlName="Phone" [(ngModel)]="vendor.Phone"></ion-input>
+                        </ion-item>
+                        <ng-container *ngFor="let error of errormessages.Phone">
+                          <div style="color: red;" *ngIf="loginform.get('Phone').hasError(error.type) && (loginform.get('Phone').dirty || loginform.get('Phone').touched)">
+                            *{{ error.message }}
+                          </div>
+                        </ng-container>
+                    </ion-col>
+                  </ion-row>
+                
+        </ion-grid>
+        </form>
+        <ion-row justify-content-center>
+            <ion-col class="col-md-6">
+                <ion-item>
+                   <ion-icon slot="start" name="mail"></ion-icon>
+                    <ion-input type="text" placeholder="Email" [(ngModel)]="vendor.Email"></ion-input>
+                </ion-item>
+            </ion-col>
+          </ion-row>
+ 
+</ion-content>
+<ion-content *ngIf="edit == false">
+  <ion-item>
+    <ion-icon slot="start" name="person"></ion-icon>
+    <ion-input [readonly]="true" placeholder="Vendor Name"  type="text" style="border: none;text-align: left;" [(ngModel)]="vendor.Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-icon slot="start" name="pin"></ion-icon>
+    <ion-input [readonly]="true" placeholder="Address" type="text" style="border: none;text-align: left;" [(ngModel)]="vendor.Address"></ion-input>
+ </ion-item>
+  <ion-item>
+    <ion-icon slot="start" name="call"></ion-icon>
+    <ion-input [readonly]="true" placeholder="Phone" type="tel" style="border: none;text-align: left;" [(ngModel)]="vendor.Phone"></ion-input>
+ </ion-item>
+   <ion-item>
+     <ion-icon slot="start" name="mail"></ion-icon>
+     <ion-input [readonly]="true" placeholder="Email"  type="text" style="border: none;text-align: left;" [(ngModel)]="vendor.Email"></ion-input>
+   </ion-item>
+ 
+</ion-content>
+

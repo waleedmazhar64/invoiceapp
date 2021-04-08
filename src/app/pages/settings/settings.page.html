@@ -1,0 +1,279 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content >
+ <!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Account</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color: grey;">
+        PKR
+     </span>
+   </ion-label>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Reset Password</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <ion-item>
+  <ion-label (click)="logout()">
+    <h2  text-capitalize style="padding-left: 5px;color: red;">Signout</h2>  
+  </ion-label>
+ </ion-item>
+ <ion-item lines="none">
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >Sync</h2>
+  </ion-label>
+</ion-item>
+     <ion-button (click)="syncData()" expand="block" text-capitalize="false"  size="medium" style="width: 80%; margin-left: auto;margin-right: auto;--border-radius: 15px;"> <ion-icon slot="start" name="sync"></ion-icon>Sync Data</ion-button>
+     <ion-item lines="none" no-padding>
+      <ion-label text-center style="color:grey;">Last Synced: {{lastsynced}}</ion-label>
+   </ion-item>
+ <ion-item lines="none">
+
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >General</h2>
+  </ion-label>
+</ion-item>
+<!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px; color:grey;">My Business</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <ion-item (click)="dueDate()">
+  <ion-label>
+    <h2  text-capitalize style="padding-left: 5px;">Invoice Due date</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item (click)="bName()">
+  <ion-label>
+    <h2  text-capitalize style="padding-left: 5px;">Buisness Name</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item (click)="selectImage()">
+  <ion-label>
+    <h2  text-capitalize style="padding-left: 5px;">Business Logo</h2>  
+  </ion-label>
+  <!-- <ion-list>
+    <ion-item *ngFor="let img of images; index as pos" text-wrap>
+      <ion-thumbnail slot="start">
+        <img  style="border-radius:50%;" [src]="img.path" height="60" width="60">
+      </ion-thumbnail>
+    </ion-item>
+  </ion-list> -->
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Style</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        classic
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Labels</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Financial year starts</h2>  
+  </ion-label>
+  <span style="float:right;color:grey;" color="light">
+    Jan
+ </span>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Country</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        classic
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <ion-item (click)="setCurrency()">
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px">Currency</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item>
+ <!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Date Format</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        10/21/2019
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Discount</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        Discount on Subtotal
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Shipping Fields</h2>  
+  </ion-label>
+  <ion-toggle></ion-toggle>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Payment Info</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Invoice Reminders</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item lines="none">
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >Tax</h2>
+  </ion-label>
+</ion-item>
+<ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Tax Type</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+       Single Tax
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Vat</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+       8.75%
+     </span>
+   </ion-label>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Witholding Fields</h2>  
+  </ion-label>
+  <ion-toggle></ion-toggle>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Shipping Fields</h2>  
+  </ion-label>
+  <ion-label>
+    <span style="float:right;color:grey;" color="light">
+      
+    </span>
+  </ion-label>
+ </ion-item> -->
+ <!-- <ion-item lines="none">
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >DEFAULTS</h2>
+  </ion-label>
+</ion-item> -->
+<!-- <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Terms</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+       30 Days
+     </span>
+   </ion-label>
+ </ion-item> -->
+ <!-- <ion-item (click)="comments()">
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;">Comments</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Email Settings</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item lines="none">
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >SECURITY</h2>
+  </ion-label>
+</ion-item>
+<ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Passcode</h2>  
+  </ion-label>
+  <ion-label>
+     <span style="float:right;color:grey;" color="light">
+        off
+     </span>
+   </ion-label>
+   <ion-icon item-end name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item lines="none">
+  <ion-label style="color:royalblue;">
+      <h2 text-capitalize >SUPPORT</h2>
+  </ion-label>
+</ion-item>
+<ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Private Policy</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item>
+ <ion-item>
+  <ion-label>
+    <h2 text-capitalize style="padding-left: 5px;color:grey;">Send Feedback</h2>  
+  </ion-label>
+  <ion-icon name="arrow-forward"></ion-icon>
+ </ion-item> -->
+ <!-- <ion-item lines="none">
+  <ion-label text-center style="color:grey;">{{businessName}}</ion-label>
+</ion-item> -->
+<!-- <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
+ 
+<ion-list>
+  <ion-item *ngFor="let img of images; index as pos" text-wrap>
+    <ion-thumbnail slot="start">
+      <ion-img [src]="img.path"></ion-img>
+    </ion-thumbnail>
+  </ion-item>
+</ion-list> -->
+</ion-content>

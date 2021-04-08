@@ -1,0 +1,157 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <div style="width: 100%;">
+        <ion-toolbar color="primary">
+          <ion-grid>
+            <ion-row>
+                <ion-icon padding  name="close" (click)="back()"></ion-icon>
+                <ion-title>New Expenses</ion-title>
+                <ion-label padding (click)="save()">Save</ion-label>
+            </ion-row>
+          </ion-grid>
+          
+        </ion-toolbar>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              <div>
+                  <span style="float:right;padding-right: 5px;">{{expense.selectedDate}}</span>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      </ion-toolbar>
+  
+  </ion-header>
+
+<ion-content *ngIf="categoriesClicked == false">
+    <ion-item *ngIf="images.length>0">
+        <ion-img [src]="images[0].path" (click)="selectImage()"></ion-img>
+     </ion-item>
+    <!-- <ion-list *ngFor="let item of images;index as pos">
+        <ion-item >
+           <ion-thumbnail slot="start">
+               <ion-img [src]="item.path" (click)="selectImage()"></ion-img>
+             </ion-thumbnail>
+        </ion-item>
+    </ion-list> -->
+    <!-- <ion-item lines="none"  (click)="selectImage()">
+        <ion-label text-center style="color:royalblue;">
+         <ion-icon  name="add-circle-outline"></ion-icon> Attached Image
+        </ion-label>
+      </ion-item> -->
+      <form [formGroup]="loginform">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+              <ion-input [(ngModel)]="expense.expenseName" formControlName="expenseName" padding placeholder="Expense Name"></ion-input>
+              <ng-container *ngFor="let error of errormessages.expenseName">
+                <div  style="color: red;" *ngIf="loginform.get('expenseName').hasError(error.type) && (loginform.get('expenseName').dirty || loginform.get('expenseName').touched)">
+                  *{{ error.message }}
+                </div>
+              </ng-container>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item >
+        <ion-grid no-padding>
+              <ion-row>
+                <ion-col style="margin-top:2%;">
+                   Total Amount
+                </ion-col>
+                <ion-col>
+                    <span no-padding style="float: right;margin-right:12px;">
+                        <ion-input  type="number" placeholder="0.0" formControlName="totalAmount" style="border: none;text-align: right;" [(ngModel)]="expense.totalAmount"></ion-input>
+                        <ng-container *ngFor="let error of errormessages.totalAmount">
+                          <div  style="color: red;" *ngIf="loginform.get('totalAmount').hasError(error.type) && (loginform.get('totalAmount').dirty || loginform.get('totalAmount').touched)">
+                            *{{ error.message }}
+                          </div>
+                        </ng-container>
+                      </span>
+                </ion-col>
+              </ion-row>
+            </ion-grid> 
+  
+        </ion-item >
+      </form>
+        <ion-item>
+                <ion-grid>
+                  <ion-row>
+                      <ion-input (click)="categoriesClicked = true" [(ngModel)]="expense.category" padding placeholder="Category(s)">
+                        <ion-icon name="filing" style="margin-right: 1%;" slot="start"></ion-icon>
+                      </ion-input>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <ion-item>
+                  <ion-grid>
+                    <ion-row>
+                        <ion-input padding placeholder="Description" [(ngModel)]="expense.description">
+                          <ion-icon  padding-right name="clipboard" style="margin-right: 1%;" slot="start"></ion-icon>
+                        </ion-input>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+                <!-- <ion-item lines="none"  (click)="addClient()">
+                    <ion-label text-center style="color:royalblue;">
+                     <ion-icon  name="cash"></ion-icon> {{label}} {{a}}
+                    </ion-label>
+                  </ion-item> -->
+
+                    <!-- <form [formGroup]="loginform">
+                <ion-grid>
+                    <ion-row justify-content-center>
+                      <ion-input [(ngModel)]="expense.expenseName" formControlName="expenseName" padding placeholder="Expense Name"></ion-input>
+                      <ng-container *ngFor="let error of errormessages.expenseName">
+                        <div  style="color: red;" *ngIf="loginform.get('expenseName').hasError(error.type) && (loginform.get('expenseName').dirty || loginform.get('expenseName').touched)">
+                          *{{ error.message }}
+                        </div>
+                      </ng-container>
+                    </ion-row>
+                    <ion-row justify-content-center>
+                      <ion-col style="margin-top:2%;">
+                        Total Amount
+                     </ion-col>
+                     <ion-col>
+                         <span no-padding style="float: right;margin-right:12px;">
+                             <ion-input  type="number" placeholder="0.0" formControlName="totalAmount" style="border: none;text-align: right;" [(ngModel)]="expense.totalAmount"></ion-input>
+                             <ng-container *ngFor="let error of errormessages.totalAmount">
+                               <div  style="color: red;" *ngIf="loginform.get('totalAmount').hasError(error.type) && (loginform.get('totalAmount').dirty || loginform.get('totalAmount').touched)">
+                                 *{{ error.message }}
+                               </div>
+                             </ng-container>
+                           </span>
+                     </ion-col>
+                       </ion-row>
+                       <ion-row justify-content-center>
+                        <ion-input (click)="categoriesClicked = true" [(ngModel)]="expense.category" padding placeholder="Category(s)">
+                          <ion-icon name="filing" style="margin-right: 1%;" slot="start"></ion-icon>
+                        </ion-input>
+                          </ion-row>
+                        </ion-grid>
+                    </form>  -->
+</ion-content>
+
+<ion-content *ngIf="categoriesClicked == true">
+    <ion-searchbar (ionInput)="geItems($event)" placeholder="Category" showCancelButton="focus"></ion-searchbar>
+  
+    <ion-virtual-scroll  [items]="tempCategories" approxItemHeight="70px">
+    
+      <ion-item-divider *virtualHeader="let header" color="primary">
+        <ion-label>{{ header }}</ion-label>
+      </ion-item-divider>
+      <ion-item *virtualItem="let item" (click)="itemClicked(item)">
+          <ion-avatar slot="start">
+              <img src="assets/plus.png">
+          </ion-avatar>
+          <ion-label>
+            <h2 text-capitalize>{{ item }}</h2>
+            <!-- <p>{{ client.email }}</p> -->
+          </ion-label>
+      </ion-item>
+    
+    </ion-virtual-scroll>
+</ion-content>
+

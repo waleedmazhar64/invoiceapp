@@ -1,0 +1,87 @@
+import { Component } from '@angular/core';
+
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { SyncService } from 'src/app/services/sync.service';
+import { Observable, from } from 'rxjs';
+import { HTTP } from '@ionic-native/http/ngx';
+import { finalize } from 'rxjs/operators';
+import { DatabaseService} from 'src/app/services/database.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
+})
+export class AppComponent {
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private storage: Storage,
+    private router: Router,
+    private googleplus: GooglePlus,
+    private network: Network,
+    private syncService: SyncService,
+    private nativeHttp: HTTP,
+    private databaseprovider: DatabaseService,
+
+
+  ) {
+    this.initializeApp();
+  } 
+
+  initializeApp() {
+     this.platform.ready().then(() => {
+  
+
+
+      this.storage.set('app', 'invoice');
+      this.statusBar.styleDefault();
+      this.storage.get('slides').then((val1) => {
+       if (val1 === null) {
+        if (this.network.type === 'none') {
+          alert('Kindly Connect to Internet');
+        } else {
+          this.syncService.syncSlides();
+       }
+        // this.router.navigate(['slides']);
+       } else {
+        this.storage.get('ID').then((val) => {
+          if (val !== null) {
+             this.router.navigate(['/menu/dashboard']);
+             this.splashScreen.hide();
+             if (this.network.type === 'none') {
+              // alert('not connected');
+            } else {
+              if (this.databaseprovider.getCheckedSyned() === 0) {
+                this.syncService.syncLocalToServer();
+                this.databaseprovider.setChecKSyned(1);
+                // alert('connected');
+              }
+         }
+          } else {
+            this.router.navigate(['login']);
+            this.splashScreen.hide();
+          }
+        });
+       }
+     });
+    });
+  }
+  checkLogin()
+  {
+    this.googleplus.trySilentLogin({})
+   .then(res => {
+      console.log(res);
+      }
+  )
+        
+  .catch(err => console.error(err));
+  }
+}

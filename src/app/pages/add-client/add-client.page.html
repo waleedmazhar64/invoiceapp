@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-icon padding  name="arrow-back" size="medium" (click)="back()"></ion-icon>
+      </ion-buttons>
+      <ion-title>Add Client</ion-title>
+      <ion-label padding slot="end" (click)="save()">save</ion-label>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-input  plceholder="Name" [(ngModel)]="name"></ion-input><ion-icon (click)="openList()" name="person"></ion-icon>
+    </ion-item>
+    <ion-item >
+      <ion-list no-lines lines="none" *ngFor="let client of clients">
+        <ion-button (click)="setInfo(client)" text-capitalize="false" fill="outline" size="small" color="dark" style="width: 80%;">{{client.name}}</ion-button>
+      </ion-list>
+        <ion-icon slot="end" name="text" (click)="clientsPage()"></ion-icon>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
+      <ion-icon name="close" size="small" *ngIf="!!email" (click)="clearEmail()"></ion-icon>
+    </ion-item>
+    <br>
+    <ion-item>
+        <ion-icon slot="start" name="home"></ion-icon>
+        <ion-input placeholder="Address Line 1" [(ngModel)]="add1"></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!add1" (click)="clearadd1()"></ion-icon>    
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start"></ion-icon>
+        <ion-input placeholder="Address Line 2" [(ngModel)]="add2"></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!add2" (click)="clearadd2()"></ion-icon>    
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" ></ion-icon>
+        <ion-input placeholder="Address Line 3" [(ngModel)]="add3"></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!add3" (click)="clearadd3()"></ion-icon>    
+    </ion-item>
+    <br>
+    <ion-item>
+        <ion-icon slot="start" name="logo-model-s"></ion-icon>
+        <ion-input placeholder="Shipping to" [(ngModel)]="shippingTo"></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!shippingTo" (click)="clearShippingTo()"></ion-icon>    
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start"></ion-icon>
+        <ion-input placeholder="Shippind Address Line 1" [(ngModel)]="sAdd1" ></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!sAdd1" (click)="clearSadd1()" ></ion-icon>    
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" ></ion-icon>
+        <ion-input placeholder="Shippind Address Line 2" [(ngModel)]="sAdd2" ></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!sAdd2" (click)="clearSadd2()"></ion-icon>    
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start"></ion-icon>
+        <ion-input placeholder="Shippind Address Line 3" [(ngModel)]="sAdd3"></ion-input>
+        <ion-icon name="close" size="small" *ngIf="!!sAdd3" (click)="clearSadd3()"></ion-icon>    
+    </ion-item>
+     
+</ion-content>

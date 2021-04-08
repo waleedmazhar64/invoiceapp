@@ -1,0 +1,175 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button *ngIf="s == 0"></ion-menu-button>
+        <ion-icon padding  *ngIf="s == 1" (click)="back()" name="arrow-back"></ion-icon>
+      </ion-buttons>
+      <ion-title *ngIf="s == 0">Credit Memos</ion-title>
+      <ion-icon slot="end" name="search" padding (click)="s=1"></ion-icon>
+      <ion-input padding placeholder="Search Invoices" *ngIf="s == 1"></ion-input>
+    </ion-toolbar>
+    <!-- <ion-toolbar color="primary" *ngIf="s == 1">
+      <ion-row no-padding>
+        <ion-label>Suggested Searchs</ion-label>
+      </ion-row>
+    </ion-toolbar> -->
+    <ion-toolbar *ngIf="s == 1" color="primary">
+      <ion-grid >
+        
+        <ion-row>
+            <ion-col text-center>
+                <ion-button (click)="paid()" [color]="paidcolor">Issued</ion-button>
+              </ion-col>
+              <ion-col text-center >
+                  <ion-button (click)="unpaid()" [color]="unpaidcolor">Approved</ion-button>
+              </ion-col>
+        </ion-row> 
+        
+      </ion-grid>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="s == 1" color="primary">
+        <ion-grid >
+          
+          <ion-row>
+              <ion-col text-center>
+                  <ion-button (click)="pending()" [color]="pend">Pending</ion-button>
+                </ion-col>
+                <ion-col text-center >
+                    <ion-button (click)="withdrawn()" [color]="with">Withdrawn</ion-button>
+                </ion-col>
+          </ion-row> 
+          
+        </ion-grid>
+      </ion-toolbar>
+   
+  </ion-header>
+
+<ion-content padding>
+    <!-- <ion-item no-padding lines="full"></ion-item> -->
+    <p style="text-align:left;">
+        <span *ngIf="editSelected == false">1 invoice</span>
+        <span *ngIf="editSelected == true">Selected {{ selectedCount }}</span>
+          
+          <span (click)="editSelected = true" *ngIf="editSelected == false" style="float:right;" >
+              Edit
+          </span>
+          <span (click)="editSelected = false" *ngIf="editSelected == true" style="float:right;" >
+            Done
+        </span>
+      </p>
+         <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addIcon()">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed"> 
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    <ion-list *ngIf="editSelected == false">
+                
+            <ion-item-sliding  *ngFor="let item of items">
+                <ion-item-options side="start">
+                  <ion-item-option (click)="edit(item)">Edit</ion-item-option>
+                  <ion-item-option color="danger" (click)="delete(item)">Delete</ion-item-option>
+      
+                </ion-item-options>
+                <ion-item (click)="itemClicked(item)">
+      
+                  
+                    <ion-avatar slot="start" >
+                        <img src="assets/plus.png">
+                    </ion-avatar>
+                    <ion-label>
+                      <h2 text-capitalize>{{ item.name }} {{ item.duedate }}</h2>
+                      <p>{{ item.date }}</p>
+                    </ion-label>
+                    <ion-label>
+                        <span (click)="edit()" style="float:right;">
+                            $ {{ item.total }}
+                        </span>
+                    </ion-label>
+                 </ion-item>          
+              </ion-item-sliding>
+              <ion-icon slot="end" name="add-circle"></ion-icon>
+
+              </ion-list>
+              <ion-list *ngIf="editSelected == true">
+                
+                <ion-item-sliding  *ngFor="let item of items">
+                    <!-- <ion-item-options side="start">
+                      <ion-item-option (click)="edit(item)">Edit</ion-item-option>
+                      <ion-item-option color="danger" (click)="delete(item)">Delete</ion-item-option>
+          
+                    </ion-item-options>-->
+                    <ion-item *ngIf="item.selected == true"  (click)="item.selected = false" (click)="update()">
+          
+                      
+                        <ion-avatar slot="start" >
+                            <img *ngIf="item.selected == false" src="assets/out.png">
+                            <img *ngIf="item.selected == true" src="assets/fill.png">
+                        </ion-avatar>
+                        <ion-label>
+                          <h2 text-capitalize>{{ item.name }} {{ item.duedate }}</h2>
+                          <p>{{ item.date }}</p>
+                        </ion-label>
+                        <ion-label>
+                            <span (click)="edit()" style="float:right;">
+                                $ {{ item.total }}
+                            </span>
+                        </ion-label>
+                     </ion-item>  
+                     <ion-item *ngIf="item.selected == false"  (click)="item.selected = true" (click)="update()">
+          
+                      
+                      <ion-avatar slot="start" >
+                          <img *ngIf="item.selected == false" src="assets/out.png">
+                          <img *ngIf="item.selected == true" src="assets/fill.png">
+                      </ion-avatar>
+                      <ion-label>
+                        <h2 text-capitalize>{{ item.name }} {{ item.duedate }}</h2>
+                        <p>{{ item.date }}</p>
+                      </ion-label>
+                      <ion-label>
+                          <span (click)="edit()" style="float:right;">
+                              $ {{ item.total }}
+                          </span>
+                      </ion-label>
+                   </ion-item>                  
+                  </ion-item-sliding>
+                  <ion-icon slot="end" name="add-circle"></ion-icon>
+    
+                  </ion-list>
+<!--     
+  <ion-infinite-scroll threshold="5%" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="loading more..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+</ion-content>
+
+<ion-footer *ngIf="editSelected == true">
+ 
+    <div style="text-align: center;">
+      <ion-toolbar color="light">
+          <ion-grid text-center>
+              <ion-row text-center>
+                  <ion-button color="danger" text-capitalize="false" fill="outline" size="small"  style="width: 80%; margin-left: auto;margin-right: auto;--border-radius: 15px;">Delete</ion-button>
+
+              </ion-row>
+              
+              <ion-row text-center>
+                  <ion-buttons slot="end">
+                      <ion-button>
+                        <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                        forward
+                      </ion-button>
+                    </ion-buttons>
+              </ion-row>
+              <ion-row>
+              </ion-row>
+              </ion-grid>
+
+      </ion-toolbar>
+    </div>
+
+
+</ion-footer>

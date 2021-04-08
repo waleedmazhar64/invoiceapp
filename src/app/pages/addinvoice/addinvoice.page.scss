@@ -1,0 +1,47 @@
+.buttonCss {
+
+  button.alert-button.exit-button{
+    color: red;
+  }
+
+  button.alert-button.cancel-button{
+    color: green;
+  }
+}
+.d{
+  color: red;
+}
+.customClass{
+  color:#e74c3c !important;
+ }
+ .my-label {
+  font-size: 85%;
+}
+.my-label1 {
+  font-size: 80%;
+} 
+.my-label2 {
+  font-size: 60%;
+}
+.my-label3 {
+  font-size: 65%;
+}
+.my-label4 {
+  font-size: 85%;
+}
+ion-toolbar {
+
+  --background: #084e1b;
+  
+}
+
+ion-button{
+  --border-color: #084e1b;
+}
+ion-select {
+  --placeholder-color: red !important;
+}
+ion-select{
+   opacity: 1.0 !important;
+  //  color: var(--ion-color-secondary);
+}

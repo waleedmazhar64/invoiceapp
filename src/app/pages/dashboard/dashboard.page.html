@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Dashboard</ion-title>
+        <!-- <ion-icon slot="end" name="notifications-outline" padding size="medium" (click)="notificatioons()"></ion-icon> -->
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+      <h6>Client(s)</h6>
+  </ion-item>
+<ion-item  *ngIf="invoices.length == 0" (click)="outstandingClients()">
+    <span style="text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 50%;color:gray"><h6>{{ clientOutstanding }}</h6></span>
+
+                    <ion-label>
+                      <h6 text-capitalize>OUTSTANDING</h6>
+                      <!-- <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p> -->
+                    </ion-label>
+                    <!-- <ion-label>
+                        <span style="float:right;" class="cancel">
+                            PKR {{ item.menu_order * item.sale_price }}
+                        </span>
+                    </ion-label> -->
+                    <ion-icon item-end name="arrow-dropright"></ion-icon>
+</ion-item>
+<ion-item *ngIf="invoices.length == 0" (click)="overdue()">
+    <span style="text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 50%;"><h6  style="color: red;">{{clientOverdue}} </h6></span>
+
+                    <ion-label>
+                      <h6 text-capitalize style="color: red;">OVERDUE</h6>
+                      <!-- <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p> -->
+                    </ion-label>
+                    <!-- <ion-label>
+                        <span style="float:right;" class="cancel">
+                            PKR {{ item.menu_order * item.sale_price }}
+                        </span>
+                    </ion-label> -->
+                    <ion-icon item-end name="arrow-dropright"></ion-icon>
+
+</ion-item>
+<ion-item *ngIf="invoices.length > 0" >
+    <!-- <span style="background-color:#ddd;text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 10%;">{{pos + 1 }}</span> -->
+
+                    <ion-label>
+                      <h2 text-capitalize>OUTSTANDING</h2>
+                      <!-- <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p> -->
+                    </ion-label>
+                    <!-- <ion-label>
+                        <span style="float:right;" class="cancel">
+                            PKR {{ item.menu_order * item.sale_price }}
+                        </span>
+                    </ion-label> -->
+                    <ion-icon item-end name="arrow-dropright"></ion-icon>
+
+</ion-item>
+<ion-item *ngIf="invoices.length > 0">
+    <!-- <span style="background-color:#ddd;text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 10%;">{{pos + 1 }}</span> -->
+
+                    <ion-label>
+                      <h2 text-capitalize>OUTSTANDING</h2>
+                      <!-- <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p> -->
+                    </ion-label>
+                    <!-- <ion-label>
+                        <span style="float:right;" class="cancel">
+                            PKR {{ item.menu_order * item.sale_price }}
+                        </span>
+                    </ion-label> -->
+                    <ion-icon item-end name="arrow-dropright"></ion-icon>
+
+</ion-item>
+<ion-item>
+    <h6>Vendor(s)</h6>
+</ion-item>
+<ion-item  *ngIf="invoices.length == 0" (click)="outstandingVendors()">
+  <span style="text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 50%;color:gray"><h6>{{currency}} {{ totalDebit2 - totalCredit2}} </h6></span>
+
+                  <ion-label>
+                    <h6 text-capitalize>OUTSTANDING</h6>
+                    <!-- <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p> -->
+                  </ion-label>
+                  <!-- <ion-label>
+                      <span style="float:right;" class="cancel">
+                          PKR {{ item.menu_order * item.sale_price }}
+                      </span>
+                  </ion-label> -->
+                  <ion-icon item-end name="arrow-dropright"></ion-icon>
+</ion-item>
+<ion-list *ngIf="invoices.length == 0">
+  <!-- <ion-item lines="none">
+    <ion-label item-start>Recent Invoice(s)</ion-label>
+    <span style="float:right;">
+        <ion-label (click)="seemore()" item-end>See more</ion-label>
+    </span>
+  </ion-item> -->
+
+</ion-list>
+<!-- <div style="width:100%" id="curve_chart"></div>
+<div id="myChart"></div>
+<ion-card-content>
+  <canvas #barChart></canvas>
+</ion-card-content> -->
+<ion-card-content>
+  <canvas id="line-chart" width="800" height="450"></canvas>
+</ion-card-content>
+
+<!-- <div id="chart_div" style="width: 500px; height: 300px;"></div> -->
+<!-- <div id="lineChart" ></div> -->
+
+<!-- <div style="display: block"><canvas id="yudhatp-chart"></canvas></div> -->
+<!-- <ion-button (click)="btn()">sub</ion-button> -->
+<!-- <ion-button (click)="publish()">pub</ion-button>
+<ion-button (click)="btn1()">unsub</ion-button> -->
+
+</ion-content>

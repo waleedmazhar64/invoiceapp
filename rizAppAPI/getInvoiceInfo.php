@@ -1,0 +1,87 @@
+<?php
+ require 'database.php';
+/*
+ * Following code will create a new product row
+ * All product details are read from HTTP Post Request
+ */
+ 
+// array for JSON response
+ header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+  header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
+ header('Content-Type: application/json');
+ $headerStringValue = $_SERVER['HTTP_X_API_KEY'];
+ $match = false;
+ if($headerStringValue == "28b32377-cd77-44b3-8cbb-a9dc69bfddf4") 
+ {
+
+    $jsondata = json_decode(file_get_contents('php://input'), true);
+
+$response = array();
+ global $data;
+// check for required fields
+//if (isset($_GET['email']) && isset($_GET['password'])) 
+if (isset($jsondata['InvoiceID']) && isset($jsondata['CustomerID'])) 
+{
+   $CustomerID = $jsondata['CustomerID'];
+   $InvoiceID = $jsondata['InvoiceID'];
+ 
+    // mysql inserting a new row
+	 
+
+    $result = mysqli_query($con,"SELECT Amount  FROM tblledger where CustomerID='$CustomerID' AND IsCredit='1' ORDER BY Date DESC limit 1");
+	$row = mysqli_fetch_array($result);
+	$result2 = mysqli_query($con,"SELECT SUM(Amount) AS TotalDebit FROM tblledger where CustomerID='$CustomerID' AND IsCredit='0'");
+	$row2 = mysqli_fetch_array($result2);
+	$result3 = mysqli_query($con,"SELECT SUM(Amount) AS TotalCredit FROM tblledger where CustomerID='$CustomerID' AND IsCredit='1'");
+	$row3 = mysqli_fetch_array($result3);
+	$result4 = mysqli_query($con,"SELECT *  FROM tblledger where InvoiceID='$InvoiceID'");
+	$row4 = mysqli_fetch_array($result4);
+	
+	
+	
+ 
+    // check if row inserted or not
+    if ($result && $result2 && $result3 && $result4) {
+		if($row){
+			$row = $row + $row2 + $row3 + $row4;
+			echo json_encode($row);
+		}
+		else {
+			$row['Amount']="0";
+			$row = $row + $row2 + $row4;
+			echo json_encode($row);
+			//echo 'no data';
+		}
+		        //echo json_encode($row);
+				//echo json_encode($row2);
+				
+
+    } else {
+        // failed to insert row
+        $response["success"] = 0;
+        $response["message"] = "Failed to add";
+ 
+        // echoing JSON response
+        echo json_encode($response);
+    }
+} else {
+    // required field is missing
+    $response["success"] = 0;
+    $response["message"] = "Required field(s) is missing";
+ 
+    // echoing JSON response
+    echo json_encode($response);
+}
+
+ } 
+ else {
+	 
+	$response["success"] = 0;
+    $response["message"] = "Api Authentication Failed";
+ 
+    // echoing JSON response
+    echo json_encode($response);
+ }
+
+?>

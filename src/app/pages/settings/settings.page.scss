@@ -1,0 +1,75 @@
+
+.mylogo {
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:25%;
+    transform:translateY(-50%);
+    text-align: center;
+}
+.mypic{
+
+    width: 120px;
+    height:120px;
+}
+.mytext{
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:50%;
+    transform:translateY(-50%);
+    text-align: center;
+    font-weight: bold;
+}
+.mytext2{
+    position:absolute;
+    left: 2%;
+    right: 0;
+    margin:0 auto;
+    top:58%;
+    font-size:11px;
+    transform:translateY(-50%);
+    text-align: center;
+}
+.pos{
+    position: fixed;
+    left: 5%;
+    bottom: 10%;
+    right: 0;
+}
+.shadow-blue{
+    width: 93%;
+    border-radius:5px;
+    text-align:center;
+}
+// a {
+//     text-decoration: none;
+//    }
+//    ion-item {
+//     --border-color: var(--ion-color-primary, #3880ff);
+//   }
+//   .mytext3{
+//     font-weight: bold;
+// }
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }

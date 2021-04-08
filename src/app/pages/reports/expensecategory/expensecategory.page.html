@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <ion-title>Expense by Category</ion-title>
+    <ion-label padding slot="end" (click)="share()">Share</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-outer">
+    <div class="container-inner" >
+      <ngx-datatable
+ 
+ [rows]="data"
+ [ngClass]="style"
+ [rowHeight]="'auto'"
+ [headerHeight]="'auto'"
+ [columnMode]="'force'"
+ (activate)="onActivate($event)"
+ >
+ 
+    <ngx-datatable-column name="Category"></ngx-datatable-column>
+    <ngx-datatable-column name="Amount"></ngx-datatable-column>
+    <!-- <ngx-datatable-column name="Paid"></ngx-datatable-column> -->
+    <!-- <ngx-datatable-column name="Actions">
+        <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+            <ion-button (click)="open(rowIndex,row)" text-capitalize="false" fill="outline" size="small" color="danger" style="width: auto;">Delete</ion-button>
+         </ng-template>
+    </ngx-datatable-column> -->
+ 
+
+    
+</ngx-datatable>
+</div>
+    
+</div>
+</ion-content>

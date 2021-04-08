@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+      <ion-title>Client(s)</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-searchbar (ionInput)="geItems($event)" placeholder="Search Clients" showCancelButton="focus"></ion-searchbar>
+
+<ion-virtual-scroll [items]="tempActiveClients" approxItemHeight="70px" [headerFn]="separateLetter">
+
+  <ion-item-divider *virtualHeader="let header" color="primary">
+    <ion-label>{{ header }}</ion-label>
+  </ion-item-divider>
+  <ion-item *virtualItem="let client" (click)="itemClicked(client)">
+      <ion-avatar slot="start">
+          <img src="assets/plus.png">
+      </ion-avatar>
+      <ion-label>
+        <h2 text-capitalize>{{ client.Fname }} {{client.Lname}}</h2>
+        <p>{{client.Shop}}, {{ client.BillingAddress }}, {{ client.City}}</p>
+      </ion-label>
+  </ion-item>
+
+</ion-virtual-scroll>
+
+</ion-content>

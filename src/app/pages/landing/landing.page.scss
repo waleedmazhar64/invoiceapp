@@ -1,0 +1,50 @@
+.mylogo {
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:42%;
+    transform:translateY(-50%);
+    text-align: center;
+}
+ion-content{
+    --background: #fff url('/assets/bg.jpg') no-repeat center center / cover;
+}
+.mono{
+    position: absolute;
+    left: 6%;
+    right: 0;
+    top: 87%;
+    width: 124px;
+    height: auto;
+}
+.rights{
+    position: absolute;
+    left: 6%;
+    right: 0;
+    top: 93%;
+    width: 124px;
+    height: auto;
+    font-size: 9Px;
+}
+.mytext1{
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:54%;
+    transform:translateY(-50%);
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+.mytext{
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:60%;
+    transform:translateY(-50%);
+    text-align: center;
+    font-size: -webkit-xxx-large;
+}

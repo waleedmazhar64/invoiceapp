@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-icon padding  name="arrow-back" (click)="cancel()"></ion-icon>
+      </ion-buttons>
+      <ion-title>Comment</ion-title>
+      <ion-icon padding slot="end" name="checkmark" (click)="back()" ></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+<ion-content>
+<!-- Textarea in an item with a placeholder -->
+<ion-item>
+    <!-- <textarea rows="10" [(ngModel)]="message"></textarea> -->
+    <ion-textarea rows="1" [(ngModel)]="message"></ion-textarea>
+  </ion-item>
+</ion-content>

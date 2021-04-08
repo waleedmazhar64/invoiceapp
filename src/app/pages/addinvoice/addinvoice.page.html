@@ -1,0 +1,220 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div style="width: 100%;">
+      <ion-toolbar color="primary">
+          <ion-label padding slot="start" (click)="back()">Close</ion-label>
+          <!-- <ion-icon padding  name="close" (click)="back()"></ion-icon> -->
+          <!-- <ion-icon padding  slot="end" name="share-alt" (click)="share()"></ion-icon> -->
+          <ion-label *ngIf="outOfStockItems === 0" padding slot="end" (click)="share()">Save</ion-label>
+      </ion-toolbar>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <div>
+                <span style="float:right;padding-right: 5px; font-size: 4rem;">Invoice</span>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+      <div>
+          <!-- <p  style="text-align:left;padding-left: 5px;">
+              {{invoice.created}}
+              <span  style="float:right;padding-right: 5px;">
+                  
+              </span>
+          </p> -->
+          <p  style="text-align:left;padding-left: 5px;">
+              <span style="font-size: 75%;" (click)="selectDueDate()"> Due date: {{invoice.duedate}}</span>
+              <span *ngIf="selectedClientID === 0" (click)="addClient()" style="float:right;padding-right: 5px;font-weight:bold;">
+                 {{client}}
+              </span>
+              <span *ngIf="selectedClientID > 0" (click)="addClient()" style="float:right;padding-right: 5px;font-weight:bold;">
+                {{client}} 
+             </span>
+             <br>
+                <span *ngIf="selectedClientID > 0 && selectedClientBalance > 0" style="font-size: 70%; color: rgb(151, 9, 37); float:right;padding-right: 5px;">
+                  Outstanding Balance: {{currency}} {{ selectedClientBalance }}/-
+                </span>
+                <span *ngIf="selectedClientID > 0 && selectedClientBalance === 0" style="font-size: 70%; color: rgb(151, 9, 37); float:right;padding-right: 5px;">
+                  Outstanding Balance: NIL
+                </span>
+          </p>
+         
+      </div>
+    
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+       
+    <!-- <ion-item (click)="addClient()">            
+        <ion-avatar slot="start" >
+            <img src="assets/plus.png">
+            
+        </ion-avatar>
+        <ion-label>
+          <h2 text-capitalize>{{ client }}</h2>
+        </ion-label>
+       
+    </ion-item>  -->
+    <ion-item (click)="addItem()" *ngIf="tempActiveItems.length === 0">            
+        <ion-avatar slot="start" >
+            <img src="assets/plus.png">
+            
+        </ion-avatar>
+        <ion-label>
+          <h2 text-capitalize>Item</h2>
+        </ion-label>
+    </ion-item> 
+   
+    <ion-item >
+      <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-item no-padding lines="none" style="text-align: right;">
+                  <p class="my-label1"  style="font-weight: bold;"> Qty
+                  </p>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item lines="none" style="text-align: left;">
+                <p class="my-label1"  style="font-weight: bold;"> Item(s)
+                </p>
+              </ion-item>
+            </ion-col>
+            <!-- <ion-col size="3">
+              <ion-item lines="none" style="text-align: right;">
+                <p class="my-label1"  style="font-weight: bold;"> Price(PKR)
+                </p>
+              </ion-item>
+            </ion-col> -->
+            <ion-col size="4">
+              <ion-item lines="none"style="text-align: right;">
+                  <p class="my-label1"  style="font-weight: bold;">Total</p>
+                  <p class="my-label3"  style="font-weight: bold;">({{currency}})</p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+  </ion-item>
+        
+      <ion-list no-padding>
+          <ion-item-sliding  *ngFor="let item of tempActiveItems;index as pos" >
+              <!-- <ion-item-options side="end">
+                  <ion-item-option color="danger" (click)="removeSelected(pos)">Delete</ion-item-option>
+                </ion-item-options> -->
+        <ion-item  >
+          <ion-grid>
+              <ion-row>
+                <ion-col size="2">
+                  <ion-item no-padding lines="none">
+                      <!--<ion-icon (click)="quantityDecrement(item)" name="remove-circle" color="danger"></ion-icon>
+                      <ion-label text-center > {{item.Qty}}
+                      </ion-label>
+                      <ion-icon (click)="quantityIncrement(item)" name="add-circle" color="success"></ion-icon>-->
+                      <span *ngIf="item.Star == 1" style="color: red;">*</span>
+                      <ion-input (click)="clearVal(item)"  (ionInput)="updateItem($event,item)"  maxlength="5"  type="tel" no-padding style="border: none;text-align: center;" [(ngModel)]="item.Qty"></ion-input> 
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <!--<ion-item  lines="none">
+                      <ion-label  class="my-label" style="text-align: left;" >{{item.Description}}</ion-label>
+                  </ion-item>-->
+
+                  <ion-item lines="none"style="float: left;">
+                    <p class="my-label" >{{item.Description}} <span *ngIf="item.Instock > 0" style="color: green;">({{item.Instock}})</span><span *ngIf="item.Instock === 0" style="color: red;">(out of stock)</span><span><ion-input class="my-label" (click)="clearVal1(item)"  (ionInput)="updateTotal($event,item)"  maxlength="5"  type="tel" no-padding style="border: none;text-align: left;max-width: 100%;" [(ngModel)]="item.Rate">
+                    {{item.Qty}}x</ion-input></span></p>
+                    
+                  </ion-item>
+                  
+                </ion-col>
+                <!-- <ion-col  size="3">
+                  <ion-item no-padding lines="none" >
+                       <ion-label text-center >{{item.Rate}}</ion-label> 
+                      <ion-input class="my-label" (ionInput)="updateTotal($event,item)"  maxlength="5"  type="tel" no-padding style="border: none;text-align: right;" [(ngModel)]="item.Rate"></ion-input> 
+                  </ion-item>
+                </ion-col> -->
+                <ion-col size="3">
+                  <!--<ion-item  lines="none">
+                      <ion-label style="text-align:right;float:right;" class="my-label"  >{{item.Qty * item.Rate}}</ion-label>
+                  </ion-item>-->
+                  <ion-item lines="none"style="float: right;">
+                    
+                    <p class="my-label"  >{{item.Qty * item.Rate}}</p>
+                    
+                                    </ion-item>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+          <!-- <ion-label>1</ion-label>
+          <ion-label>1</ion-label>
+          <ion-label text-center style="color:royalblue;">show less</ion-label>
+          <span style="float:right;" class="cancel">
+              PKR 
+          </span> -->
+
+        </ion-item>
+        </ion-item-sliding>
+      </ion-list>   
+      <ion-button *ngIf="selectedItems.length > 0" (click)="addItemafter()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;border-radius: 50px; --border-radius: 15px;" >
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Item
+      </ion-button>
+    <ion-item color="light">            
+      
+                <ion-label>
+                        <h3 text-capitalize style="padding-left: 5px;"  class="lightgrey">Subtotal <ion-icon  name="pricetag"></ion-icon></h3>  
+                 </ion-label>
+                 <ion-label>
+                 <span style="float:right;" color="dark">
+                            {{subtotal | currency:currency:true:"1.2"}}
+                    </span>
+                </ion-label>
+       
+    </ion-item>    
+    <ion-item color="light" (click)="discountPrompt()">            
+            <ion-label>
+                    <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">Discount</h3>
+                  </ion-label>
+                  <ion-label>
+                      <span style="float:right;" class="cancel">
+                           {{discount | currency:currency:true:"1.2"}}
+                      </span>
+                    </ion-label>
+           
+     </ion-item>
+     <ion-item (click)="paymentInfo()" color="dark">            
+            <ion-label>
+                    <h2 text-capitalize style="padding-left: 5px;font-size: 135%;">Total</h2>
+                    <!-- <h5 style="font-size: 10px;">Paid:PKR {{payed}}</h5> -->
+             </ion-label>
+             <ion-label>
+                      <span style="float:right;" >
+                        <h2 style="font-size: 135%">  {{subtotal - discount | currency:currency:true:"1.2"}}</h2> 
+                        <!-- <h6 style="font-size: 10px;">Balance Due:PKR {{duepayment}}</h6>  -->
+                      </span>
+              </ion-label>
+           
+     </ion-item>  
+     <ion-button (click)="presentPrompt()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;border-radius: 50px; --border-radius: 15px;" >Remarks</ion-button>
+     <!-- <ion-list *ngFor="let item of images;index as pos">
+         <ion-item >
+            <ion-thumbnail slot="start">
+                <ion-img [src]="item.path"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                Attachment
+              </ion-label>
+              <ion-button slot="end" fill="clear" (click)="deleteImage(item, pos)" class="ion-md-time">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+         </ion-item>
+     </ion-list> -->
+     <!-- <ion-button (click)="selectImage()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;--border-radius: 15px;"> <ion-icon slot="start" name="attach"></ion-icon>Attachments</ion-button> -->
+
+</ion-list>
+
+</ion-content>

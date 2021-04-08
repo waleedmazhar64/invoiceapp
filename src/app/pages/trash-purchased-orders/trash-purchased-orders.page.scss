@@ -1,0 +1,59 @@
+// ion-header {
+//     height: 43px;//by default 56px
+//   }
+//   ion-toolbar {
+//     height: 64px;
+//     --background: #5252d1;
+//   }
+
+ion-icon {
+    width: 30px; //Preferred size here
+    height: 30px;
+    color:#ffffff;
+  }
+  h1 {
+   
+    font-size: 401%;
+    color: #ffffff;
+    position: absolute;
+    left: 21%;
+    top: 15%
+  }
+  .loo{
+  
+    font-size: 98%;
+    color: #ffffff;
+    position: absolute;
+    left: 5%;
+    top: 75%;
+    text-decoration: none;
+  
+  }
+  .boo{
+  
+    font-size: 97%;
+    color: #ffffff;
+    position: absolute;
+    left: 5%;
+    bottom: 5%;
+    text-decoration: none;
+  
+  }
+  .coo{
+  
+    font-size: 90%;
+    color: #ffffff;
+    position: absolute;
+    left: 77%;
+    bottom: 5%;
+    text-decoration:none;
+  }
+  .foo{
+    background:#5252d1;
+        height: 31%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+  }
+  

@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button (click)="changeName()"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Client(s)</ion-title>
+      </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <!-- <ion-button (click)="selectActive()" [fill]="active" text-capitalize="false" fill="outline" size="small" color="primary" style="width: auto;color: #084e1b;">Active</ion-button> -->
+
+    <ion-searchbar (ionInput)="geItems($event)" placeholder="Search Client(s)" showCancelButton="focus"></ion-searchbar>
+    <ion-button (click)="selectActive()" [fill]="active" text-capitalize="false" fill="outline" size="small" color="primary" style="width: auto;">Active</ion-button>
+    <ion-button (click)="selectInActive()" [fill]="inactive" text-capitalize="false" fill="outline" size="small"  color="primary" style="width: auto;">Inactive</ion-button>
+
+    <!-- <ion-spinner name="crescent" *ngIf="showSpinner" color="primary"></ion-spinner> -->
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed"> 
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    <ion-fab *ngIf="showAdd === 1" vertical="bottom" horizontal="end" slot="fixed" (click)="addClient()">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+<ion-virtual-scroll *ngIf="selected === 'act'" [items]="tempActiveClients" approxItemHeight="70px" [headerFn]="separateLetter">
+   
+  <ion-item-divider *virtualHeader="let header" color="primary">
+    <ion-label>{{ header }}</ion-label>
+  </ion-item-divider>
+  <ion-item-sliding *virtualItem="let client;index as pos" >
+      <ion-item-options side="start">
+        <ion-item-option style="background-color: green;" (click)="call(client)">Call</ion-item-option>
+        <ion-item-option style="background-color: primary;" (click)="Sms(client)">SMS</ion-item-option>
+        <ion-item-option style="background-color: red;" (click)="del(client)">Delete</ion-item-option>
+
+      </ion-item-options>
+      <ion-item-options side="end">
+          <!-- <ion-item-option color="danger" (click)="del(client)">Delete</ion-item-option> -->
+          <ion-item-option style="background-color: primary;" (click)="addPayment($event,client)">Receive Payment</ion-item-option>
+        </ion-item-options>
+  <ion-item (click)="ledger($event,client)">
+      <!-- <ion-avatar slot="start">
+          <img src="assets/plus.png">  
+      </ion-avatar> -->
+      <ion-icon padding (click)="itemClicked(client,$event)" name="create"></ion-icon>
+      <ion-label>
+        <h2 text-capitalize>{{ client.Fname }} {{client.Lname}}</h2>
+        <p>{{client.Shop}}, {{ client.BillingAddress }}, {{ client.City}}</p>
+      </ion-label>
+      <ion-label>
+        <span  style="float:right;color:red;">
+            {{client.Balance | currency:currency:true:"1.2"}}
+        </span>
+    </ion-label>
+      <!-- <ion-button item-end (click)="addPayment($event,client)" text-capitalize="false" fill="outline" size="small" color="success" style="width: auto;">Receive Payment</ion-button> -->
+    </ion-item>
+  </ion-item-sliding>
+
+</ion-virtual-scroll>
+
+<ion-virtual-scroll *ngIf="selected == 'inact'" [items]="tempInactiveClients" approxItemHeight="70px" [headerFn]="separateLetter">
+   
+  <ion-item-divider *virtualHeader="let header" color="primary">
+    <ion-label>{{ header }}</ion-label>
+  </ion-item-divider>
+  <ion-item-sliding *virtualItem="let client;index as pos" >
+    <ion-item-options side="start">
+      <ion-item-option style="background-color: green;" (click)="call(client)">Call</ion-item-option>
+      <ion-item-option style="background-color: primary;" (click)="Sms(client)">SMS</ion-item-option>
+      <!-- <ion-item-option style="background-color: yellowgreen;" (click)="restored(client)">Activate</ion-item-option> -->
+
+    </ion-item-options>
+    <ion-item-options side="end">
+        <!-- <ion-item-option color="danger" (click)="del(client)">Delete</ion-item-option> -->
+        <ion-item-option style="background-color: primary;" (click)="addPayment($event,client)">Receive Payment</ion-item-option>
+      </ion-item-options>
+        <ion-item (click)="ledger($event,client)">
+          <!-- <ion-avatar slot="start">
+              <img src="assets/plus.png">  
+          </ion-avatar> -->
+          <ion-icon padding (click)="itemClicked(client,$event)" name="create"></ion-icon>
+          <ion-label>
+            <h2 text-capitalize>{{ client.Fname }} {{client.Lname}}</h2>
+            <p>{{client.Shop}}, {{ client.BillingAddress }}, {{ client.City}}</p>
+          </ion-label>
+          <ion-label>
+            <span  style="float:right;color:red;">
+                {{client.Balance | currency:currency:true:"1.2"}}
+            </span>
+        </ion-label>
+          <!-- <ion-button item-end (click)="addPayment($event,client)" text-capitalize="false" fill="outline" size="small" color="success" style="width: auto;">Receive Payment</ion-button> -->
+        </ion-item>
+  </ion-item-sliding>
+
+</ion-virtual-scroll>
+
+</ion-content>

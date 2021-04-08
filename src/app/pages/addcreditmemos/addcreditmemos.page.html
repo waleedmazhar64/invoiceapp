@@ -1,0 +1,147 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <div style="width: 100%;">
+        <ion-toolbar color="primary">
+            <ion-icon padding  name="close" (click)="back()"></ion-icon>
+            <ion-icon padding  slot="end" name="share-alt" (click)="share()"></ion-icon>
+        </ion-toolbar>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              <div>
+                  <span style="float:right;padding-right: 5px; font-size: 4rem;">C MEMO</span>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+        <div (click)="orderInfo()">
+            <p  style="text-align:left;padding-left: 5px;">
+                {{creditmemo.created}}
+                <span  style="float:right;padding-right: 5px;">
+                    
+                </span>
+            </p>
+            <p  style="text-align:left;padding-left: 5px;">
+               
+                <span  style="float:right;padding-right: 5px;">
+                    {{creditmemo.name}}
+                </span>
+            </p>
+           
+        </div>
+      
+      </ion-toolbar>
+  
+  </ion-header>
+  
+  <ion-content>
+      <ion-list>
+       
+          <ion-item (click)="addClient()">            
+              <ion-avatar slot="start" >
+                  <img src="assets/plus.png">
+                  
+              </ion-avatar>
+              <ion-label>
+                <h2 text-capitalize>{{ client }}</h2>
+                <!-- <p style="font-size: 10px;">{{ add1 }}</p> -->
+                <p style="font-size: 10px;">{{ add1 }}</p>
+                <!-- <p style="font-size: 10px;">{{ add2 }}</p>
+                <p style="font-size: 10px;">{{ add3 }}</p> -->
+            
+              </ion-label>
+             
+          </ion-item> 
+          <ion-item (click)="addItem()" *ngIf="selectedItems.length === 0">            
+              <ion-avatar slot="start" >
+                  <img src="assets/plus.png">
+                  
+              </ion-avatar>
+              <ion-label>
+                <h2 text-capitalize>Item</h2>
+              </ion-label>
+          </ion-item>     
+            <ion-list *ngIf="selectedItems.length > 0" >
+                <ion-item-sliding  *ngFor="let item of selectedItems;index as pos" >
+                    <ion-item-options side="end">
+                        <ion-item-option color="danger" (click)="removeSelected(pos)">Delete</ion-item-option>
+                      </ion-item-options>
+              <ion-item (click)="editItem(item,pos)" >
+                  <!-- <ion-avatar slot="start" >
+                      <img src="assets/b.png">
+                  </ion-avatar> -->
+                  <span style="background-color:#ddd;text-align: center;margin-right: 10px;padding-top: 2%;padding-bottom: 2%;width: 10%;">{{pos + 1 }}</span>
+
+                  <ion-label>
+                    <h2 text-capitalize>{{item.name}}</h2>
+                    <p>{{item.menu_order}}x{{item.sale_price}}({{item.regular_price}})</p>
+                  </ion-label>
+                  <ion-label>
+                      <span style="float:right;" class="cancel">
+                          PKR {{ item.menu_order * item.sale_price }}
+                      </span>
+                  </ion-label>
+              </ion-item>
+              </ion-item-sliding>
+            </ion-list>   
+            <ion-button *ngIf="selectedItems.length > 0" (click)="addItemafter()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;border-radius: 50px; --border-radius: 15px;" >
+                <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+              Item
+            </ion-button>
+          <ion-item color="light">            
+            
+                      <ion-label>
+                              <h3 text-capitalize style="padding-left: 5px;"  class="lightgrey">Subtotal <ion-icon  name="pricetag"></ion-icon></h3>  
+                       </ion-label>
+                       <ion-label>
+                       <span style="float:right;" color="dark">
+                                  PKR {{subtotal}}
+                          </span>
+                      </ion-label>
+             
+          </ion-item>    
+          <ion-item color="light">            
+                  <ion-label>
+                          <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">Discount</h3>
+                        </ion-label>
+                        <ion-label>
+                            <span style="float:right;" class="cancel">
+                                PKR {{discount}}
+                            </span>
+                        </ion-label>
+                 
+           </ion-item>
+           <ion-item color="dark">            
+                  <ion-label>
+                          <h1 text-capitalize style="padding-left: 5px;">Total</h1>
+                          <h5 style="font-size: 10px;">Paid:PKR {{payed}}</h5>
+                   </ion-label>
+                   <ion-label>
+                            <span style="float:right;" >
+                              <h1> PKR{{total}}</h1> 
+                              <h6 style="font-size: 10px;">Balance Due:PKR {{duepayment}}</h6> 
+
+                            </span>
+                    </ion-label>
+                 
+           </ion-item>  
+           <ion-button (click)="comment()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;border-radius: 50px; --border-radius: 15px;" >{{ message }}</ion-button>
+           <ion-list *ngFor="let item of images;index as pos">
+               <ion-item >
+                  <ion-thumbnail slot="start">
+                      <ion-img [src]="item.path"></ion-img>
+                    </ion-thumbnail>
+                    <ion-label>
+                      Attachment
+                    </ion-label>
+                    <ion-button slot="end" fill="clear" (click)="deleteImage(item, pos)" class="ion-md-time">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+               </ion-item>
+           </ion-list>
+           <ion-button (click)="selectImage()" expand="block" text-capitalize="false" fill="outline" size="large" style="width: 80%; margin-left: auto;margin-right: auto;--border-radius: 15px;"> <ion-icon slot="start" name="attach"></ion-icon>Attachments</ion-button>
+
+</ion-list>
+  </ion-content>
+  

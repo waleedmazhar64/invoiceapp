@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-icon padding  name="arrow-back" (click)="back()" size="medium"></ion-icon>   
+      </ion-buttons>
+      <ion-title>Add Item</ion-title>
+      <ion-label padding slot="end" (click)="login()">Next</ion-label>
+      <ion-label padding slot="end" (click)="logout()">Out</ion-label>
+
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="additem-items">
+        <ion-icon name="logo-dropbox"></ion-icon>
+        <ion-label></ion-label>
+
+      </ion-tab-button>
+      <!-- <ion-tab-button tab="additem-time">
+          <ion-icon name="logo-dropbox"></ion-icon>
+          <ion-label></ion-label>
+  
+        </ion-tab-button> -->
+        <ion-tab-button tab="additem-expenses">
+            <ion-icon name="paper"></ion-icon>
+            <ion-label></ion-label>
+    
+          </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

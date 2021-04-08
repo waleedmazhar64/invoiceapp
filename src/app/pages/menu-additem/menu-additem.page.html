@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-icon padding  name="close" (click)="close()"></ion-icon>
+      </ion-buttons>
+      <ion-title>New Item</ion-title>
+      <ion-label padding slot="end" (click)="save()">Save</ion-label>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <!-- <ion-item lines="none">
+        <ion-label style="color:royalblue;">
+            <h2 text-capitalize >Description</h2>
+        </ion-label>
+    </ion-item>
+      <ion-item>
+          <ion-input placeholder="Tap here to add description"  type="text" style="border: none;text-align: left;" [(ngModel)]="item.Description"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+          <ion-label style="color:royalblue;">
+              <h2 text-capitalize >Rate</h2>
+          </ion-label>
+      </ion-item>
+        <ion-item>
+            <ion-input placeholder="PKR0.00"  type="number" style="border: none;text-align: left;" [(ngModel)]="item.Rate"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label style="color:royalblue;">
+                <h2 text-capitalize >Cost</h2>
+            </ion-label>
+        </ion-item>
+          <ion-item>
+              <ion-input placeholder="PKR0.00"  type="number" style="border: none;text-align: left;" [(ngModel)]="item.Cost"></ion-input>
+          </ion-item> -->
+          <form [formGroup]="loginform">
+                <ion-grid>
+                    <ion-row justify-content-center>
+                      <ion-col class="col-md-6">
+                            <ion-item lines="none">
+                                    <ion-label style="color:royalblue;">
+                                        <h2 text-capitalize >Description</h2>
+                                    </ion-label>
+                                </ion-item>
+                                  <ion-item>
+                                      <ion-input placeholder="Tap here to add description" formControlName="Description"  type="text" style="border: none;text-align: left;" [(ngModel)]="item.Description"></ion-input>
+                                  </ion-item>
+                          <ng-container *ngFor="let error of errormessages.Description">
+                            <div  style="color: red;" *ngIf="loginform.get('Description').hasError(error.type) && (loginform.get('Description').dirty || loginform.get('Description').touched)">
+                              *{{ error.message }}
+                            </div>
+                          </ng-container>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row justify-content-center>
+                         <ion-col class="col-md-6">
+                                <ion-item lines="none">
+                                        <ion-label style="color:royalblue;">
+                                            <h2 text-capitalize >Rate</h2>
+                                        </ion-label>
+                                    </ion-item>
+                                      <ion-item>
+                                          <ion-input placeholder="PKR0.00" formControlName="Rate"  type="number" style="border: none;text-align: left;" [(ngModel)]="item.Rate"></ion-input>
+                                      </ion-item>
+                             <ng-container *ngFor="let error of errormessages.Rate">
+                               <div style="color: red;" *ngIf="loginform.get('Rate').hasError(error.type) && (loginform.get('Rate').dirty || loginform.get('Rate').touched)">
+                                 *{{ error.message }}
+                               </div>
+                             </ng-container>
+                         </ion-col>
+                       </ion-row>
+                       <ion-row justify-content-center>
+                            <ion-col class="col-md-6">
+                                    <ion-item lines="none">
+                                            <ion-label style="color:royalblue;">
+                                                <h2 text-capitalize >Cost</h2>
+                                            </ion-label>
+                                        </ion-item>
+                                          <ion-item>
+                                              <ion-input placeholder="PKR0.00" formControlName="Cost"  type="number" style="border: none;text-align: left;" [(ngModel)]="item.Cost"></ion-input>
+                                          </ion-item>
+                                <ng-container *ngFor="let error of errormessages.Cost">
+                                  <div style="color: red;" *ngIf="loginform.get('Cost').hasError(error.type) && (loginform.get('Cost').dirty || loginform.get('Cost').touched)">
+                                    *{{ error.message }}
+                                  </div>
+                                </ng-container>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                    </form>          
+          
+</ion-content>

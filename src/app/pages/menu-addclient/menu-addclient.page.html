@@ -1,0 +1,224 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-icon padding  name="close" (click)="close()"></ion-icon>
+      </ion-buttons>
+      <ion-title>Details</ion-title>
+      <ion-label  padding slot="end" (click)="save()">Save</ion-label>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <!-- <ion-item lines="none">
+      <ion-label style="color:royalblue;">
+          <h2 text-capitalize >Billing Name</h2>
+      </ion-label>
+  </ion-item> -->
+  <!-- <form [formGroup]="loginform">
+   <ion-item>
+      <ion-icon slot="start" name="person"></ion-icon>
+      <ion-input placeholder="First Name"   type="text" style="border: none;text-align: left;" [(ngModel)]="client.Fname"></ion-input>
+   </ion-item>
+    <ion-item>
+       <ion-icon slot="start" name="person"></ion-icon>
+       <ion-input placeholder="Last Name" type="text" style="border: none;text-align: left;" [(ngModel)]="client.Lname"></ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-icon slot="start" name="cart"></ion-icon>
+       <ion-input placeholder="Shop"  type="text" style="border: none;text-align: left;" [(ngModel)]="client.Shop"></ion-input>
+     </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="pin"></ion-icon>
+        <ion-input (ionInput)="geItems($event)" placeholder="Billing Address" type="text" style="border: none;text-align: left;" [(ngModel)]="client.BillingAddress"></ion-input>
+       
+     </ion-item>
+     <ion-item>
+       <ion-icon slot="start" name="business"></ion-icon>
+       <ion-input placeholder="City" type="text" style="border: none;text-align: left;" [(ngModel)]="client.City"></ion-input>
+      
+    </ion-item>
+
+    <ion-item>
+       <ion-icon slot="start" name="call"></ion-icon>
+       <ion-input placeholder="Cell" type="tel" style="border: none;text-align: left;" [(ngModel)]="client.Cell"></ion-input>
+     
+    </ion-item>  
+  </form> -->
+
+    <form [formGroup]="loginform">
+      <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col class="col-md-6">
+                <ion-item>
+                    <ion-icon slot="start" name="person"></ion-icon>
+                    <ion-input type="text" placeholder="First Name"  formControlName="Fname" [(ngModel)]="client.Fname"></ion-input>
+                </ion-item>
+                <ng-container *ngFor="let error of errormessages.Fname">
+                  <div  style="color: red;" *ngIf="loginform.get('Fname').hasError(error.type) && (loginform.get('Fname').dirty || loginform.get('Fname').touched)">
+                    *{{ error.message }}
+                  </div>
+                </ng-container>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+               <ion-col class="col-md-6">
+                   <ion-item>
+                       <ion-icon slot="start" name="person"></ion-icon>
+                       <ion-input type="text" placeholder="Last Name"  formControlName="Lname" [(ngModel)]="client.Lname"></ion-input>
+                   </ion-item>
+                   <ng-container *ngFor="let error of errormessages.Lname">
+                     <div style="color: red;" *ngIf="loginform.get('Lname').hasError(error.type) && (loginform.get('Lname').dirty || loginform.get('Lname').touched)">
+                       *{{ error.message }}
+                     </div>
+                   </ng-container>
+               </ion-col>
+             </ion-row>
+             <ion-row justify-content-center>
+                  <ion-col class="col-md-6">
+                      <ion-item>
+                           <ion-icon slot="start" name="cart"></ion-icon>
+                          <ion-input type="text" placeholder="Shop" formControlName="Shop" [(ngModel)]="client.Shop"></ion-input>
+                      </ion-item>
+                      <ng-container *ngFor="let error of errormessages.Shop">
+                        <div style="color: red;" *ngIf="loginform.get('Shop').hasError(error.type) && (loginform.get('Shop').dirty || loginform.get('Shop').touched)">
+                          *{{ error.message }}
+                        </div>
+                      </ng-container>
+                  </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                     <ion-col class="col-md-6">
+                         <ion-item>
+                              <ion-icon slot="start" name="pin"></ion-icon>
+                             <ion-input type="text" placeholder="Billing Address" formControlName="BAddress" [(ngModel)]="client.BillingAddress"></ion-input>
+                         </ion-item>
+                         <ng-container *ngFor="let error of errormessages.BAddress">
+                           <div style="color: red;" *ngIf="loginform.get('BAddress').hasError(error.type) && (loginform.get('BAddress').dirty || loginform.get('BAddress').touched)">
+                             *{{ error.message }}
+                           </div>
+                         </ng-container>
+                     </ion-col>
+                   </ion-row>
+                   <ion-row justify-content-center>
+                        <ion-col class="col-md-6">
+                            <ion-item>
+                                 <ion-icon slot="start" name="business"></ion-icon>
+                                <ion-input type="text" placeholder="City" formControlName="City" [(ngModel)]="client.City"></ion-input>
+                            </ion-item>
+                            <ng-container *ngFor="let error of errormessages.City">
+                              <div style="color: red;" *ngIf="loginform.get('City').hasError(error.type) && (loginform.get('City').dirty || loginform.get('City').touched)">
+                                *{{ error.message }}
+                              </div>
+                            </ng-container>
+                        </ion-col>
+                      </ion-row>
+                     
+           
+        </ion-grid>
+  </form>
+  <form [formGroup]="loginform1">
+       <ion-row justify-content-center>
+          <ion-col class="col-md-6">
+                               <ion-item>
+                                    <ion-icon slot="start" name="call"></ion-icon>
+                                   <ion-input type="tel" placeholder="Cell" formControlName="Cell" [(ngModel)]="client.Cell"></ion-input>
+                               </ion-item>
+                               <ng-container *ngFor="let error of errormessages.Cell">
+                                 <div style="color: red;" *ngIf="loginform1.get('Cell').hasError(error.type) && (loginform1.get('Cell').dirty || loginform1.get('Cell').touched)">
+                                   *{{ error.message }}
+                                 </div>
+                               </ng-container>
+                           </ion-col>
+                         </ion-row>
+                         </form>
+       <!-- <ion-item>
+          <ion-icon slot="start"></ion-icon>
+          <ion-input placeholder="Line 2" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add2"></ion-input>
+       </ion-item>
+       <ion-item>
+          <ion-icon slot="start"></ion-icon>
+          <ion-input placeholder="Line 3" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add3"></ion-input>  
+       </ion-item>
+       <ion-item lines="none">
+          <ion-label style="color:royalblue;">
+              <h2 text-capitalize >Contact Details</h2>
+          </ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-icon slot="start" name="mail"></ion-icon>
+          <ion-input placeholder="Email" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add1"></ion-input>
+        
+       </ion-item>
+       <ion-item lines="none" *ngIf="showmore == true" (click)="showless()">
+         <ion-label text-center style="color:royalblue;">show more</ion-label>
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-input placeholder="Contact Name" type="text" style="border: none;text-align: left;" [(ngModel)]="client.contactName"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="phone-portrait"></ion-icon>
+          <ion-input placeholder="Phone" type="text" style="border: none;text-align: left;" [(ngModel)]="client.phone"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="call"></ion-icon>
+          <ion-input placeholder="Cell" type="text" style="border: none;text-align: left;" [(ngModel)]="client.cell"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="print"></ion-icon>
+          <ion-input placeholder="Fax" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add1"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="globe"></ion-icon>
+          <ion-input placeholder="Website" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add1"></ion-input>
+        
+       </ion-item >
+       <ion-item lines="none" *ngIf="showmore == false">
+          <ion-label style="color:royalblue;">
+              <h2 text-capitalize >Shipping Address</h2>
+          </ion-label>
+      </ion-item>
+      <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-input placeholder="Shipping to" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add1"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="pin"></ion-icon>
+          <ion-input placeholder="Line 1" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add1"></ion-input>
+        
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start"></ion-icon>
+          <ion-input placeholder="Line 2" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add2"></ion-input>
+       </ion-item>
+       <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start"></ion-icon>
+          <ion-input placeholder="Line 3" type="text" style="border: none;text-align: left;" [(ngModel)]="client.add3"></ion-input>  
+       </ion-item>
+       <ion-item lines="none" *ngIf="showmore == false">
+          <ion-label style="color:royalblue;">
+              <h2 text-capitalize >Miscellaneous</h2>
+          </ion-label>
+      </ion-item>
+      <ion-item (click)="openAlert()" *ngIf="showmore == false">
+          <ion-icon slot="start" name="calendar"></ion-icon>
+          <ion-label>{{client.days}} Days</ion-label>
+       </ion-item>
+       <ion-item lines="none" *ngIf="showmore == false">
+          <ion-label style="color:royalblue;">
+              <h2 text-capitalize >Notes</h2>
+          </ion-label>
+      </ion-item>
+      <ion-item *ngIf="showmore == false">
+          <ion-icon slot="start" name="clipboard"></ion-icon>
+          <ion-input placeholder="Notes" type="text" style="border: none;text-align: left;" [(ngModel)]="client.notes"></ion-input>  
+       </ion-item>
+       <ion-item lines="none" *ngIf="showmore == false" (click)="showmor()">
+          <ion-label text-center style="color:royalblue;">show less</ion-label>
+        </ion-item> -->
+</ion-content>

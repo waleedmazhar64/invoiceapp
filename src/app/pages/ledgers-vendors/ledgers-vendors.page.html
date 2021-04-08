@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <ion-title>Vendor Ledger</ion-title>
+    <ion-icon  class="iconSize" padding size="medium" slot="end" (click)="createPdf()" name="share"></ion-icon>
+    <ion-icon class="iconSize" size="medium" slot="end" name="cash" (click)="addPayment()"></ion-icon> 
+    <ion-icon class="iconSize" padding size="medium"  slot="end" name="document" (click)="addPO()"></ion-icon> 
+  
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+      <ion-avatar slot="start" >
+          <img src="assets/personIcon.png">
+      </ion-avatar>
+      <ion-label>
+        <h2 class="txtSize" text-capitalize>{{client.Name}}</h2>
+        <p>{{ client.Address }}</p>
+      </ion-label>
+      
+    <!-- <p  style="text-align:left;padding-left: 15px;">
+          {{client.Fname}} {{client.Lname}}
+        <span  style="float:right;padding-right: 15px;">
+          PKR {{ totalDebit - totalCredit}}  
+        </span>
+    </p> -->
+</ion-toolbar>
+<ion-toolbar  color="primary">
+    <hr width="100%" no-padding class="new1">
+   
+<p  style="text-align:left;padding-left: 15px;">
+<ion-icon (click)="call()" no-padding class="iconSize" name="call" style="margin-right: 8px;"></ion-icon>
+<ion-icon no-padding class="iconSize" size="medium" name="mail" (click)="Sms()"></ion-icon>
+        <span no-padding class="txtSize" style="float:right;padding-right: 15px;">
+          {{ client.Phone }} 
+        </span>
+</p>
+</ion-toolbar>
+<ion-toolbar >
+<p no-padding class="txtSize" style="text-align:left;padding-left: 15px;">
+ Total
+          <span no-padding *ngIf="totalCredit <= totalDebit" class="txtSize"  style="float:right;padding-right: 15px;color: red;">
+           {{ total | currency:currency:true:"1.2" }} 
+          </span>
+          <span *ngIf="totalCredit > totalDebit" no-padding class="txtSize"  style="float:right;padding-right: 15px;color: green;">
+              {{ total | currency:currency:true:"1.2" }} 
+            </span>
+</p>
+<hr width="100%" style="border-top:1px solid black">
+<p no-padding class="txtSize" style="text-align:left;padding-left: 15px; color:green;">
+    {{totalCredit | currency:currency:true:"1.2"}}
+             <span class="txtSize"  style="float:right;padding-right: 15px;color: red;">
+               {{ totalDebit | currency:currency:true:"1.2"}} 
+             </span>
+   </p>
+   <hr no-padding width="100%" style="border-top:1px solid black;">
+   <ion-grid>
+     <ion-row>
+       <ion-col  text-center>
+          Credit(+)
+       </ion-col>
+       <ion-col text-center>
+         Date
+       </ion-col>
+       <ion-col text-center>
+          Debit(-)
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+   
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-item lines="none">
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item no-padding lines="none">
+                  <ion-label text-start style="font-weight: bold;"> Date
+                  </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                  <ion-label text-end style="font-weight: bold;">Amount</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+  </ion-item> -->
+<ion-list *ngFor="let item of ledger">
+  <!-- <ion-item>
+      <ion-label>
+          <h2 text-capitalize>{{ item.Date }}</h2>
+        </ion-label>
+        <ion-label *ngIf="item.IsCredit == 1">
+            <span  style="float:right;color: green;margin-right: 20px;">
+                PKR {{ item.Amount }}
+            </span>
+        </ion-label>
+        <ion-label *ngIf="item.IsCredit == 0">
+            <span  style="float:right;color: red;margin-right: 20px;">
+                PKR {{ item.Amount }}
+            </span>
+        </ion-label>
+  </ion-item> -->
+  <ion-item >
+      <ion-grid>
+          <ion-row>
+            <ion-col *ngIf="item.IsCredit === 0" text-center>
+                -
+            </ion-col>
+            <ion-col (click)="editPayment(item)" *ngIf="item.IsCredit === 1" text-center>
+               <span style="color: green;">{{item.Amount | currency:currency:true:"1.2"}}</span>
+             </ion-col>
+             <ion-col text-center style="color:white;background-color: #3880ff;">
+                 {{item.Date}}
+               </ion-col>
+               <ion-col (click)="itemClick(item)" *ngIf="item.IsCredit === 0" text-center>
+                   <span style="color:crimson">{{item.Amount | currency:currency:true:"1.2"}}</span>
+                 </ion-col>
+                 <ion-col *ngIf="item.IsCredit === 1" text-center>
+                  -
+                  </ion-col>
+          </ion-row>
+      </ion-grid>
+   </ion-item>
+   <ion-item  *ngIf="item.Remarks.length > 0"  (click)="itemClick(item)">
+     <ion-grid>
+       <ion-row>
+         <span  style="text-align:left;padding-left: 15px;">
+           <span style="font-weight: bold;">Remarks: </span>{{item.Remarks}}
+         </span>
+         
+     </ion-row>
+     </ion-grid>
+   </ion-item>
+   
+</ion-list>
+
+</ion-content>

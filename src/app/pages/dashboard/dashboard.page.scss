@@ -1,0 +1,22 @@
+.mytext3{
+  font-weight: bold;
+}
+ion-icon {
+  font-size: 40px; //Preferred size here
+}
+.foo {
+  position:absolute;
+  left: 75%;
+  right: 0;
+  margin:0 auto;
+  top:93%;
+  transform:translateY(-50%);
+  text-align: center;
+}
+ion-header {
+  height: 56px;//by default 56px
+}
+ion-toolbar {
+  height: 56px;//by default 56px
+  
+}

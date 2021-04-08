@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Item(s)</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed"> 
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    <ion-fab *ngIf="showAdd === 1" vertical="bottom" horizontal="end" slot="fixed" (click)="addItem()">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    <ion-searchbar (ionInput)="geItems($event)" placeholder="Search Item(s)" showCancelButton="focus"></ion-searchbar>
+    <ion-button (click)="selectActive()" [fill]="active"  text-capitalize="false" fill="outline" size="small" color="primary" style="width: auto;">Active</ion-button>
+    <ion-button (click)="selectInActive()" [fill]="inactive"  text-capitalize="false" fill="outline" size="small"  color="primary" style="width: auto;">Inactive</ion-button>
+    <ion-button (click)="sorting()" [fill]="sortColor" text-capitalize="false" fill="outline" size="small"  color="primary" style="width: auto;">Sort</ion-button>
+
+    <ion-virtual-scroll *ngIf="selected === 'act'" [items]="tempActiveItems" approxItemHeight="70px">
+    
+      <!-- <ion-item-divider *virtualHeader="let header" color="primary">
+        <ion-label>{{ header }}</ion-label>
+      </ion-item-divider> -->
+      <ion-item *virtualItem="let item" (click)="itemClicked(item)">
+          <ion-avatar slot="start">
+              <img src="assets/plus.png">
+          </ion-avatar>
+          <p>
+            <span style="float:left;">{{ item.Description }}</span>
+            <!-- <p>{{ client.email }}</p> -->
+          </p>
+          <ion-label>
+              <span  style="float:right;">
+                 {{ item.Instock }}
+              </span>
+          </ion-label>
+      </ion-item>
+    
+    </ion-virtual-scroll>
+    <ion-virtual-scroll *ngIf="selected === 'inact'" [items]="tempInactiveItems" approxItemHeight="70px">
+    
+      <!-- <ion-item-divider *virtualHeader="let header" color="primary">
+        <ion-label>{{ header }}</ion-label>
+      </ion-item-divider> -->
+      <ion-item *virtualItem="let item" (click)="itemClicked(item)">
+          <ion-avatar slot="start">
+              <img src="assets/plus.png">
+          </ion-avatar>
+          <p>
+            <span style="float:left;">{{ item.Description }}</span>
+            <!-- <p>{{ client.email }}</p> -->
+          </p>
+          <ion-label style="width: auto;">
+              <span  style="float:right;">
+                 {{ item.Instock }}
+              </span>
+          </ion-label>
+      </ion-item>
+    
+    </ion-virtual-scroll>
+</ion-content>

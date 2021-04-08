@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+      <ion-title>Credit Memo Info</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-item  >
+        <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-label size="3">
+                        <h2>CM #:</h2>
+                      </ion-label>
+                </ion-col>
+                <ion-col size="9">
+                    <span no-padding style="float: right;margin-right:12px;">
+                        <ion-input no-padding style="border: none;text-align: right;" [(ngModel)]="creditmemo.name"></ion-input>  
+                      </span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-item >
+        <ion-item >
+          <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                      <ion-label size="3">
+                          <h2>Date:</h2>
+                        </ion-label>
+                  </ion-col>
+                  <ion-col size="9" (click)="selectDate()">
+                      <span no-padding style="float: right;margin-right:12px;">
+                          <!-- <ion-input (click)="rateClicked(pos)"  type="number" style="border: none;text-align: right;" [(ngModel)]="item.regular_price"></ion-input> -->
+                           {{creditmemo.created}}
+                        </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-item >
+          <ion-item >
+            <ion-grid no-padding>
+                  <ion-row>
+                    <ion-col>
+                        <ion-label size="3">
+                            <h2>Terms:</h2>
+                          </ion-label>
+                    </ion-col>
+                    <ion-col size="9" (click)="openAlert()">
+                        <span no-padding style="float: right;margin-right:12px;">
+                            <!-- <ion-input (click)="rateClicked(pos)"  type="number" style="border: none;text-align: right;" [(ngModel)]="item.regular_price"></ion-input> -->
+                             {{creditmemo.terms}}
+                          </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+            </ion-item >
+</ion-content>

@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <ion-title>Sales by Items</ion-title>
+    <ion-label padding slot="end" (click)="share()">Share</ion-label> -->
+    <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <ion-grid >
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col size="10">
+          <p no-padding style="font-size: 18px;"   (click)="optionsOpen()">Sales by Items<ion-icon (click)="optionsOpen()" *ngIf="option == false" name="arrow-dropdown"></ion-icon><ion-icon (click)="optionsOpen()" *ngIf="option == true" name="arrow-dropup"></ion-icon></p>
+          <p no-padding style="font-size: 12px;" *ngIf="selected !== 0" (click)="optionsOpen()">({{displaystartdate}}-{{displayenddate}})</p>
+          <p no-padding style="font-size: 12px;" *ngIf="selected === 0" (click)="optionsOpen()">All time</p>
+          <!-- <p no-padding style="font-size: 12px;" (click)="optionsOpen()">({{displaystartdate}}-{{displayenddate}})</p> -->
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-label padding slot="end" (click)="share()">Share</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="option == true">
+    <ion-item color="light" (click)="selectStartDate()">            
+      <ion-label>
+              <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">Start Date</h3>
+            </ion-label>
+            <ion-label>
+                <span style="float:right;" class="cancel">
+                     {{startdate}}
+                </span>
+              </ion-label>
+     
+  </ion-item>
+  <ion-item color="light" (click)="selectEndDate()">            
+    <ion-label>
+            <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">End Date</h3>
+          </ion-label>
+          <ion-label>
+              <span style="float:right;" class="cancel">
+                   {{enddate}}
+              </span>
+            </ion-label>
+   
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="all()"  text-capitalize="false" fill="outline" size="small" [color]="allcolor" style="width: auto;">All</ion-button>
+    <ion-button (click)="thisMonth()"  text-capitalize="false" fill="outline" size="small"  [color]="thismonthcolor" style="width: auto;">This Month</ion-button>
+    <ion-button (click)="lastMonth()" text-capitalize="false" fill="outline" size="small"  [color]="lastmonthcolor" style="width: auto;">Last Month</ion-button>
+    <ion-button (click)="thisquarter()" text-capitalize="false" fill="outline" size="small"  [color]="thisquartercolor" style="width: auto;">This Quarter</ion-button>
+
+  </ion-item>
+  </div>
+  <div class="container-outer">
+    <div class="container-inner" >
+      <ngx-datatable
+ 
+ [rows]="data"
+ [ngClass]="style"
+ [rowHeight]="'auto'"
+ [headerHeight]="'auto'"
+ [columnMode]="'force'"
+ (activate)="onActivate($event)"
+ >
+ 
+    <ngx-datatable-column name="Item"></ngx-datatable-column>
+    <ngx-datatable-column name="Sales"></ngx-datatable-column>
+    <ngx-datatable-column name="Qty"></ngx-datatable-column>
+    <!-- <ngx-datatable-column name="Actions">
+        <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+            <ion-button (click)="open(rowIndex,row)" text-capitalize="false" fill="outline" size="small" color="danger" style="width: auto;">Delete</ion-button>
+         </ng-template>
+    </ngx-datatable-column> -->
+ 
+
+    
+</ngx-datatable>
+</div>
+    
+</div>
+</ion-content>

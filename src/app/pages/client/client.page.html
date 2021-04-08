@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button  style=" color:#ffffff;" defaultHref="/invoice"></ion-back-button>
+        </ion-buttons>
+    <ion-title  style=" color: #ffffff;position: absolute;top: 34%;left: 31%">Client-Info</ion-title>
+    <a class ="loo" slot="secondary" href="/invoice">Save</a>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+     <ion-item>
+        <ion-input [(ngModel)]="name" type="text" placeholder="Name"></ion-input>
+      </ion-item>
+      <ion-icon class="icon" ios="ios-contact" md="md-contact" (click)="getContact()"></ion-icon>
+      <ion-item>
+          <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+          <ion-input [(ngModel)]="email" style="position: absolute;left: 16%;" type="text" placeholder="Email"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon ios="ios-call" md="md-call"></ion-icon>
+            <ion-input [(ngModel)]="phone" style="position: absolute;left: 16%;" type="text" placeholder="Phone"></ion-input>
+          </ion-item>
+          <br>
+        <ion-item>
+            <ion-icon class="icon1" ios="ios-home" md="md-home"></ion-icon>
+            <ion-input [(ngModel)]="address" style="left: 16%;" placeholder="Address Line 1"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+              <ion-icon class="icon1" ios="ios-car" md="md-car"></ion-icon>
+              <ion-input [(ngModel)]="shipping" style="left: 16%;" placeholder="Shipping to"></ion-input>
+            </ion-item>
+            <ion-button (click)="addClientInfo()"> submit</ion-button>
+</ion-content>

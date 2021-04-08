@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <!-- <ion-title>Sales by Day(<span (click)="selectDate()">{{day}}</span>)</ion-title> -->
+    <ion-title>Customer Statement</ion-title>
+
+    <!-- <ion-label padding slot="end" (click)="share()">Share</ion-label> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+        <ion-virtual-scroll [items]="total" approxItemHeight="70px" >
+ 
+
+            <ion-item-sliding *virtualItem="let customer;index as pos" >
+                <!-- <ion-item-options side="start">
+                    <ion-item-option (click)="edit(expenses)">Edit</ion-item-option>
+                    <ion-item-option color="danger" (click)="delete(expenses)">Delete</ion-item-option>
+                  </ion-item-options> -->
+            <ion-item (click)="itemClicked(customer,pos)">
+              
+                <img padding src="assets/blackcircle.png">
+                <ion-label>
+                  <h2 text-capitalize>{{ customer.Name }}</h2>
+                  <p>{{ customer.Date }}</p>
+                </ion-label>
+                <!-- <ion-label>
+                  <h2 text-capitalize style="visibility: hidden;">{{ expenses.Category }}</h2>
+                  <p>{{ expenses.Date }}</p>
+                </ion-label> -->
+                <ion-label style="text-align: right;">
+                  <span  style="float:right;">
+                    <p style="color: grey;">Amount Due</p>
+                    <span  >
+                      {{ customer.Total - customer.Paid  | currency:currency:true:"1.2" }}
+                    </span>
+                  </span>
+               
+
+                </ion-label>
+            </ion-item>
+              <div  *ngIf="customer.div == true">
+                <ion-item color="light" (click)="selectStartDate()">            
+                  <ion-label>
+                          <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">Start Date</h3>
+                        </ion-label>
+                        <ion-label>
+                            <span style="float:right;" *ngIf="selected == 1 || selected == 2 || selected == 0" class="cancel">
+                                 {{startdate}}
+                            </span>
+                            <span style="float:right;" *ngIf="selected == 3" class="lightgrey">
+                              {{startdate}}
+                            </span>
+                          </ion-label>
+                 
+              </ion-item>
+              <ion-item color="light" (click)="selectEndDate()">            
+                <ion-label>
+                        <h3 text-capitalize style="padding-left: 5px;" class="lightgrey">End Date</h3>
+                      </ion-label>
+                      <ion-label>
+                          <span style="float:right;" *ngIf="selected == 1 || selected == 2 || selected == 0" class="cancel">
+                               {{enddate}}
+                          </span>
+                          <span style="float:right;" *ngIf="selected == 3" class="lightgrey">
+                            {{enddate}}
+                          </span>
+                        </ion-label>
+               
+              </ion-item>
+              <ion-item>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      <ion-button (click)="thisMonth()"  text-capitalize="false" fill="outline" size="small"  [color]="thismonthcolor" style="width: auto;">Current Month</ion-button>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button (click)="lastMonth()" text-capitalize="false" fill="outline" size="small"  [color]="lastmonthcolor" style="width: auto;">Last Month</ion-button>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button (click)="all()"  text-capitalize="false" fill="outline" size="small" [color]="allcolor" style="width: auto;">All Time</ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <ion-item text-center>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button (click)="createStatement(customer)"  text-capitalize="false" fill="outline" size="small" [color]="createstatementcolor" style="width: auto;">Create Statement</ion-button>
+                    </ion-col>
+                    <ion-col>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <!-- <div style="text-align: center;">
+                </div> -->
+              </ion-item>
+             
+              </div>
+            </ion-item-sliding>
+          </ion-virtual-scroll>
+</ion-content>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon padding slot="start" name="arrow-back" (click)="back()" ></ion-icon>
+    <ion-title>Default Comment</ion-title>
+    <ion-label padding slot="end" (click)="save()">Save</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <!-- <textarea rows="10" [(ngModel)]="message"></textarea> -->
+    <ion-textarea rows="1" [(ngModel)]="comment"></ion-textarea>
+  </ion-item>
+</ion-content>

@@ -1,0 +1,142 @@
+<ion-split-pane>
+  <ion-menu contentId="content">
+ 
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+ 
+    <ion-content>
+      <ion-list *ngIf="images.length === 0" >
+                  <div class="mylogo">
+                      <img  style="border-radius:50%;"  src="{{imageUrl}}" height="60" width="60">
+                      <p  class="margin-top-m margin-bottom-m">{{company}}</p>
+                  </div>
+      </ion-list>
+      <ion-list *ngFor="let img of images; index as pos" >
+          
+        <div class="mylogo">
+            <img  style="border-radius:50%;" *ngIf="images.length > 0" [src]="img.path" height="60" width="60">
+            <p  class="margin-top-m margin-bottom-m">{{company}}</p>
+        </div>
+            
+         </ion-list>
+      <!-- <ion-list>          
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)">
+            <ion-label>
+              {{ p.title }}
+            </ion-label>
+          </ion-item>
+          <ion-item button *ngIf="p.childern?.length > 0" (click)="p.open = !p.open"
+              [class.active-parent]="!!p.open" detail="false">
+              <ion-icon slot="end" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+              <ion-icon slot="end" name="arrow-down" *ngIf="!!p.open"></ion-icon>
+              <ion-label>
+                  {{ p.title }}
+                </ion-label>
+            </ion-item>
+            <ion-list *ngIf="!!p.open">
+                <ion-menu-toggle>
+                    <ion-item class="sub-item" *ngFor="let sub of p.childern" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active" >
+                      <ion-icon [name]="sub.icon" slot="start"></ion-icon>
+                      <ion-label>
+                        {{ sub.title }}
+                      </ion-label>
+                    </ion-item>    
+                  </ion-menu-toggle>
+            </ion-list>
+  
+        </ion-menu-toggle>
+        
+
+        <ion-item (click)="getUp()" routerLink="/login" routerDirection="root">Logout</ion-item>
+      </ion-list> -->
+      
+    
+
+      <div *ngFor="let p of pages">
+          <ion-menu-toggle *ngIf="p.url && p.childern == undefined">
+            <!-- <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active" > -->
+              <ion-item (click)="hi(p.url)" routerLinkActive="active" >
+
+              <ion-icon [name]="p.icon" slot="start"></ion-icon>
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+
+          </ion-menu-toggle>
+          <ion-item  *ngIf="p.childern?.length > 0" >
+            <ion-icon [name]="p.icon" slot="start"></ion-icon>
+           
+            <ion-label   (click)="hi(p.url)">
+                {{ p.title }}
+              </ion-label>
+              <ion-icon item-end name="arrow-forward" *ngIf="!p.open"  (click)="p.open = !p.open"
+            [class.active-parent]="!!p.open" detail="false"></ion-icon>
+            <ion-icon item-end name="arrow-down" *ngIf="!!p.open" (click)="p.open = !p.open"
+            [class.active-parent]="!!p.open" detail="false"></ion-icon>
+          </ion-item>
+          <ion-list *ngIf="!!p.open">
+              <ion-menu-toggle>
+                  <ion-item class="sub-item" *ngFor="let sub of p.childern" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active" >
+                    <ion-icon slot="start"></ion-icon>
+                    <ion-icon class="icon" no-padding [name]="sub.icon" slot="start"></ion-icon>
+                    {{sub.title}}
+                   
+                    <!-- <ion-label>
+                        
+                      {{ sub.title }}
+                    </ion-label> -->
+                  </ion-item>    
+                </ion-menu-toggle>
+          </ion-list>
+
+        </div>
+ 
+    </ion-content>
+    <ion-footer>
+        <ion-menu-toggle auto-hide="false">
+       <ion-row auto-hide="false">
+          <ion-col  >
+            <!-- <ion-tab-button tab="schedule" [routerLink]="'/menu/clients'" routerDirection="root" > -->
+            <ion-tab-button tab="schedule" (click)="hi('/menu/clients')" routerDirection="root" >
+
+              <ion-icon name="person-add"></ion-icon>
+              <ion-label>Client</ion-label>
+              <!-- <ion-badge>6</ion-badge> -->
+            </ion-tab-button>
+          </ion-col>
+          <ion-col  >
+            <!-- <ion-tab-button tab="schedule" [routerLink]="/menu/logs" routerDirection="root"> -->
+            <ion-tab-button tab="schedule" (click)="hi('/menu/logs')" routerDirection="root">
+             <ion-icon name="albums"></ion-icon>
+              <ion-label>Logs</ion-label>
+              <!-- <ion-badge>6</ion-badge> -->
+            </ion-tab-button>
+          </ion-col>
+          <ion-col  >
+            <!-- <ion-tab-button tab="schedule" [routerLink]="'/menu/settings'" routerDirection="root"> -->
+            <ion-tab-button tab="schedule" (click)="hi('/menu/settings')" routerDirection="root">
+              <ion-icon name="cog"></ion-icon>
+              <ion-label>Settings</ion-label>
+            </ion-tab-button>
+           </ion-col>
+           <ion-col  >
+            <!-- <ion-tab-button tab="schedule" [routerLink]="'/menu/settings'" routerDirection="root"> -->
+            <ion-tab-button tab="schedule" (click)="exitApp()" routerDirection="root">
+              <!-- <ion-icon name="cog"></ion-icon> -->
+              <ion-icon name="exit"></ion-icon>
+              <ion-label>Exit</ion-label>
+            </ion-tab-button>
+           </ion-col>
+      </ion-row> 
+    </ion-menu-toggle>
+  </ion-footer>
+  </ion-menu>
+ 
+  <ion-router-outlet id="content" main></ion-router-outlet>
+ 
+</ion-split-pane>

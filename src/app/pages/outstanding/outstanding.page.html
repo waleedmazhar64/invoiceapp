@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button *ngIf="s == 0"></ion-menu-button> -->
+      <ion-icon padding   (click)="back()" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title *ngIf="s == 0">Outstanding Invoice(s)</ion-title>
+    <ion-icon slot="end" name="search" padding (click)="s=1"></ion-icon>
+    <ion-input (ionInput)="geItems($event)" padding placeholder="Search Invoices" *ngIf="s == 1"></ion-input>
+  </ion-toolbar>
+
+  <!-- <ion-toolbar *ngIf="s == 1" color="primary">
+    <ion-grid >
+      
+      <ion-row>
+          <ion-col text-center>
+              <ion-button (click)="paid()" [color]="paidcolor">Paid</ion-button>
+            </ion-col>
+            <ion-col text-center >
+                <ion-button (click)="unpaid()" [color]="unpaidcolor">Unpaid</ion-button>
+            </ion-col>
+      </ion-row> 
+      
+    </ion-grid>
+  </ion-toolbar> -->
+ 
+</ion-header>
+
+<ion-content padding>
+    <!-- <p style="text-align:left;">
+      <span *ngIf="editSelected == false">{{tempInvoices.length}} invoice(s)</span>
+      <span *ngIf="editSelected == true">Selected {{ selectedCount }}</span>
+      
+        <span (click)="editSelected = false" *ngIf="editSelected == true" style="float:right;" >
+          Done
+      </span>
+    </p> -->
+    
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addIcon()">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+   
+    
+    <!-- <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed"> 
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher> -->
+    <ion-list *ngIf="editSelected == false">
+                
+            <ion-item-sliding  *ngFor="let item of tempInvoices">
+                <ion-item-options side="start">
+                  <ion-item-option color="danger" (click)="del(item)">Delete</ion-item-option>
+      
+                </ion-item-options>
+                <ion-item-options side="end">
+                  <ion-item-option color="primary" (click)="createPdf(item)">Share</ion-item-option>
+                </ion-item-options>
+                <ion-item (click)="itemClicked(item)">
+      
+                    <img padding src="assets/bill.png">
+
+
+                    <ion-label>
+                      <h2 text-capitalize>{{ item.Fname }}</h2>
+                      <p>{{ item.CreateDate }}</p>
+                    </ion-label>
+                    <p style="font-size: 80%;">
+                        <span  style="float:right;">
+                             {{ item.Total | currency:currency:true:"1.2" }}
+                        </span>
+                    </p>
+                      
+                    
+                 </ion-item>          
+              </ion-item-sliding>
+              <ion-icon slot="end" name="add-circle"></ion-icon>
+
+              </ion-list>
+              <!-- <ion-list *ngIf="editSelected == true">
+                
+                <ion-item-sliding  *ngFor="let item of tempInvoices">
+                    <ion-item-options side="start">
+                      <ion-item-option (click)="edit(item)">Edit</ion-item-option>
+                      <ion-item-option color="danger" (click)="delete(item)">Delete</ion-item-option>
+          
+                    </ion-item-options>
+                    <ion-item *ngIf="item.selected == true"  (click)="item.selected = false" (click)="update()">
+          
+                      
+                        <ion-avatar slot="start" >
+                            <img *ngIf="item.selected == false" src="assets/out.png">
+                            <img *ngIf="item.selected == true" src="assets/fill.png">
+                        </ion-avatar>
+                        <ion-label>
+                          <h2 text-capitalize>{{ item.Fname }}</h2>
+                          <p>{{ item.CreateDate }}</p>
+                        </ion-label>
+                        <p style="font-size: 80%;">
+                            <span  style="float:right;">
+                                 {{ item.Total | currency:currency:true:"1.2" }}
+                            </span>
+                        </p>
+                     </ion-item>  
+                     <ion-item *ngIf="item.selected == false"  (click)="item.selected = true" (click)="update()">
+          
+                      
+                      <ion-avatar slot="start" >
+                          <img *ngIf="item.selected == false" src="assets/out.png">
+                          <img *ngIf="item.selected == true" src="assets/fill.png">
+                      </ion-avatar>
+                      <ion-label>
+                        <h2 text-capitalize>{{ item.Fname }}</h2>
+                        <p>{{ item.CreateDate }}</p>
+                      </ion-label>
+                      <p style="font-size: 80%;">
+                          <span  style="float:right;">
+                               {{ item.Total | currency:currency:true:"1.2" }}
+                          </span>
+                      </p>
+                   </ion-item>                  
+                  </ion-item-sliding>
+                  <ion-icon slot="end" name="add-circle"></ion-icon>
+    
+                  </ion-list> -->
+    
+  <ion-infinite-scroll threshold="5%" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="loading more..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  
+
+</ion-content>
+<ion-footer *ngIf="editSelected == true">
+ 
+    <div style="text-align: center;">
+      <ion-toolbar color="light">
+          <ion-grid>
+              <ion-row>
+                <ion-col text-center>
+                    <ion-button color="primary" text-capitalize="false" fill="outline" size="small"  style="width: auto;">Move to</ion-button>
+                </ion-col>
+                <ion-col text-center>
+                    <ion-button color="success" text-capitalize="false" fill="outline" size="small"  style="width: auto;">Paid</ion-button>
+          
+                </ion-col>
+                <ion-col text-center>
+                    <ion-button color="danger" text-capitalize="false" fill="outline" size="small"  style="width: auto;">Delete</ion-button>
+          
+                </ion-col>
+              </ion-row>
+              
+              <ion-row text-center>
+                  <ion-buttons slot="end">
+                      <ion-button>
+                        <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                        forward
+                      </ion-button>
+                    </ion-buttons>
+              </ion-row>
+              <ion-row>
+              </ion-row>
+              </ion-grid>
+
+      </ion-toolbar>
+    </div>
+
+
+</ion-footer>

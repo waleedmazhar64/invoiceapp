@@ -1,0 +1,118 @@
+.mylogo {
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:27%;
+    transform:translateY(-50%);
+    text-align: center;
+}
+.mono{
+    position: absolute;
+    left: 6%;
+    right: 0;
+    top: 87%;
+    width: 124px;
+    height: auto;
+}
+.rights{
+    position: absolute;
+    left: 6%;
+    right: 0;
+    top: 93%;
+    width: 124px;
+    height: auto;
+    font-size: 9Px;
+}
+.mypic{
+
+    width: 250px;
+    height:auto;
+}
+.mytext{
+    position:absolute;
+    left: 4%;
+    right: 0;
+    margin:0 auto;
+    top:50%;
+    transform:translateY(-50%);
+    text-align: center;
+    font-weight: bold;
+}
+.mytext2{
+    position:absolute;
+    left: 2%;
+    right: 0;
+    margin:0 auto;
+    top:55%;
+    font-size:11px;
+    transform:translateY(-50%);
+    text-align: center;
+}
+.mono1{
+    position:absolute;
+    left: 2%;
+    right: 0;
+    margin:0 auto;
+    top:74%;
+    font-size:15px;
+    transform:translateY(-50%);
+    text-align: center;
+}
+.pos{
+    position: fixed;
+    left: 5%;
+    bottom: 35%;
+    right: 0;
+}
+.pos1{
+    position: fixed;
+    left: 5%;
+    bottom: 26%;
+    right: 0;
+    width: inherit;
+}
+.pos2{
+    position: fixed;
+    left: 5%;
+    bottom: 15%;
+    right: 0;
+    width: inherit;
+}
+.shadow-blue{
+    width: 93%;
+    border-radius:6px;
+    text-align:center;
+    background-color:#01379d;
+}
+a {
+    text-decoration: none;
+   }
+   .foo {
+    left: 37%;
+    top: 87%;
+    position: absolute;
+   
+   
+  }
+  .alllogo{
+    background-color: #3b5998;
+    width: 77%;
+    height: auto;
+  }
+  
+  ion-icon {
+      color:#ffffffff;
+    width: 30px; //Preferred size here
+    height: 30px;
+    border-radius: 8px;
+}
+ion-content{
+    --background: rgb(255, 255, 255)
+     url('/assets/bg.jpg') no-repeat center center / cover;
+}
+ion-button{
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(92,89,92,1);
+-moz-box-shadow: 5px 5px 5px 0px rgba(92,89,92,1);
+box-shadow: 5px 5px 5px 0px rgba(92,89,92,1);
+  }

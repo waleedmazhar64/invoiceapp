@@ -1,0 +1,107 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-icon padding  name="arrow-back"  size="medium" (click)="back()"></ion-icon>   
+        </ion-buttons>
+        <ion-title>Item Amount</ion-title>
+        <ion-label padding slot="end" (click)="save()">Save</ion-label>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list *ngFor="let item of selectdItems;index as pos">
+  <ion-item>
+    <ion-grid padding>
+        <ion-item lines="none" no-padding>
+            <ion-icon  name="radio-button-on"></ion-icon>  
+            <ion-input style="border: none;" [(ngModel)]="item.name"></ion-input>
+        </ion-item>
+      <ion-item lines="none" no-padding>
+      <ion-grid no-padding>
+            <ion-row>
+              <ion-col>
+                  <ion-label no-padding>
+                      <h3>Rgular Price</h3>
+                    </ion-label>
+              </ion-col>
+              <ion-col>
+                  <span no-padding style="float: right;margin-right:12px;">
+                      <!-- <ion-input (click)="rateClicked(pos)"  type="number" style="border: none;text-align: right;" [(ngModel)]="item.regular_price"></ion-input> -->
+                      {{tempItem.regular_price}}
+                    </span>
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+
+      </ion-item >
+      <ion-item lines="none" no-padding>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col>
+                <ion-label no-padding>
+                    <h3>Sale Price</h3>
+                  </ion-label>
+            </ion-col>
+            <ion-col>
+                <span no-padding style="float: right;margin-right:12px;">
+                    <ion-input (click)="rateClicked(pos)"  type="number" style="border: none;text-align: right;" [(ngModel)]="tempItem.sale_price"></ion-input>
+                  </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
+      </ion-item>
+        <ion-item lines="none" no-padding>
+            <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                      <ion-label>
+                          <h3>Qty</h3>
+                        </ion-label>
+                  </ion-col>
+                  <ion-col>
+                      <span no-padding style="float: right;margin-right:12px;">
+                          <ion-input (click)="qtyClicked(pos)"  type="number" style="border: none;text-align: right;" [(ngModel)]="tempItem.menu_order"></ion-input>
+                        </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid> 
+        </ion-item>
+          <ion-item lines="none" no-padding>
+              <ion-grid no-padding>
+                  <ion-row>
+                    <ion-col>
+                        <ion-label>
+                            <h3>Amount</h3>
+                          </ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <span  style="float: right;margin-right:12px;">
+                          {{tempItem.sale_price * tempItem.menu_order}}
+                           </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid> 
+          </ion-item>
+          <ion-item lines="none" no-padding>
+            <ion-grid no-padding>
+              <ion-row>
+                <ion-col>
+                    <ion-label>
+                        <h3>Tax</h3>
+                      </ion-label>
+                </ion-col>
+                <ion-col>
+                    <span no-padding style="float: right;">
+                        <ion-toggle [(ngModel)]="item.tax" [checked]="item.tax" (ionChange)="tax($event,pos)" size="small"  color="primary"></ion-toggle>
+                    </span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <!--here is new code-->
+
+
+    </ion-grid>
+  </ion-item>
+</ion-list>
+</ion-content>
